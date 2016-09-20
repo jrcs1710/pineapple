@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.senai.sp.cfp132.PineappleSystems.Controller.TelaInicialController">
+   <children>
+      <ImageView fitHeight="500.0" fitWidth="800.0" layoutY="100.0">
+         <image>
+            <Image url="@body_main.png" />
+         </image>
+      </ImageView>
+      <Pane prefHeight="100.0" prefWidth="800.0">
+         <children>
+            <ImageView fitHeight="100.0" fitWidth="800.0">
+               <image>
+                  <Image url="@upper_main_teste.png" />
+               </image>
+            </ImageView>
+            <Hyperlink fx:id="hlWeb" layoutX="170.0" layoutY="22.0" style="-fx-text-fill: white; -fx-font-size: 30px;" text="Web" textFill="WHITE">
+               <effect>
+                  <Glow level="0.81" />
+               </effect></Hyperlink>
+            <Hyperlink fx:id="hlAndroid" layoutX="268.0" layoutY="22.0" style="-fx-font-size: 30px;" text="App Android" textFill="WHITE">
+               <effect>
+                  <Glow level="0.81" />
+               </effect></Hyperlink>
+            <Button fx:id="btLogout" layoutX="692.0" layoutY="49.0" mnemonicParsing="false" style="-fx-background-color: #ffffff00; -fx-font-size: 24;" text="Fechar" textFill="#618dff" />
+         </children>
+      </Pane>
+      <Pane prefHeight="600.0" prefWidth="140.0" style="-fx-background-color: #ffffff07;">
+         <children>
+            <ImageView fitHeight="100.0" fitWidth="118.0" layoutX="5.0">
+               <image>
+                  <Image url="@pineapple_logo.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="btPrintReport" layoutX="5.0" layoutY="158.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="110.0" style="-fx-background-color: #ffffff00;">
+               <graphic>
+                  <ImageView fitHeight="110.0" fitWidth="110.0">
+                     <image>
+                        <Image url="@print_desktop.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="btPrintQrCode" layoutX="5.0" layoutY="308.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="110.0" style="-fx-background-color: #ffffff00;">
+               <graphic>
+                  <ImageView fitHeight="110.0" fitWidth="110.0">
+                     <image>
+                        <Image url="@QRCode_desktop.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="btSettings" layoutX="5.0" layoutY="442.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="110.0" style="-fx-background-color: #ffffff00;">
+               <graphic>
+                  <ImageView fitHeight="110.0" fitWidth="110.0">
+                     <image>
+                        <Image url="@logout.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </Pane>
+      <Label fx:id="lbTabela" layoutX="161.0" layoutY="147.0" style="-fx-font-size: 20px; -fx-text-fill: white;" text="Escolha um dos ambientes:" />
+      <ChoiceBox fx:id="cbAmbientes" layoutX="636.0" layoutY="146.0" prefWidth="150.0" />
+      <TableView fx:id="tbPatrimonio" layoutX="151.0" layoutY="193.0" prefHeight="393.0" prefWidth="641.0">
+        <columns>
+         
+          <TableColumn fx:id="colNrPat" prefWidth="100.0" text="N. Patrimonio" />
+          <TableColumn fx:id="colTipo" prefWidth="100.0" text="Tipo" />
+          <TableColumn fx:id="colModelo" prefWidth="100.0" text="Modelo" />
+           <TableColumn fx:id="colAmbiente" prefWidth="100.0" text="Ambiente" />
+          
+        </columns>
+      </TableView>
+      <CheckBox fx:id="chkTodos" layoutX="472.0" layoutY="149.0" mnemonicParsing="false" text="Selecionar Todos" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </CheckBox>
+      <TextField fx:id="txfCdPatrimonio" layoutX="636.0" layoutY="115.0" prefHeight="31.0" prefWidth="150.0" promptText="N de Patrimonio" />
+      <Label fx:id="lbcdPatrimonio" layoutX="161.0" layoutY="116.0" style="-fx-font-size: 20px; -fx-text-fill: white;" text="Digite um N de patrimonio:" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Pineapple Inc</title>
+</h:head>
+<h:body>
+	<h:outputStylesheet library="css" name="tooplate_style3.css" />
+	<div id="tooplate_wrapper">
+		<div id="tooplate_header">
+			<div id="site_title">
+				<h1>
+					<a href="#">Pineapple Systems</a>
+				</h1>
+			</div>
+			<div id="twitter">
+				<a href="#"></a>
+			</div>
+			<div id="tooplate_menu">
+				<ul>
+					<h:form>
+						<p:menubar orientation="#{megaMenuView.orientation}" style="margin-top:20px">
+							<p:submenu label="Requisições">
+								<p:menuitem value="Abertas" url="requisicoes_abertas.xhtml" />
+								<p:menuitem value="Historico" url="historico.xhtml" />
+							</p:submenu>
+							
+							<p:menuitem value="Seus Ambientes" url="seus_ambientes.xhtml" />
+							
+							<p:menuitem value="Info. Pessoal" url="informacoes_pessoais.xhtml" />
+							
+							<p:menuitem value="Logout" action="#{loginController.logout}" />
+						</p:menubar>
+					</h:form>
+				</ul>
+			</div>
+		</div>
+		<ui:insert name="conteudo"> Espaço para o conteúdo da tela </ui:insert>
+	</div>
+	<div id="tooplate_footer_wrapper_2">
+		<div id="tooplate_footer_2">
+			Copyright © 2015 <a href="#">Pineapple Inc</a> 
+			- Design: <a href="http://www.pudim.com.br/">Dwargar</a> 
+			- Códigos: <a href="http://www.youtube.com/watch?v=FWtO0cfgewY">Ivan Ivanovitch Ivanovsky</a>
+		</div>
+	</div>
+</h:body>
+</html>

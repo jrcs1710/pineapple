@@ -1,0 +1,133 @@
+﻿<ui:composition 
+	template="../templates/template_funcionarios.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:define name="conteudo">
+	<div id="tooplate_middle">
+		<div id="mid_title_16">Seus Ambientes</div>
+	</div>
+	<div id="tooplate_main">
+		<div class="col_w900">
+			<div class="col_w450 float_l">
+				<div id="cp_contact_form" style="margin-left: 0px">
+					<h:form method="post" id="form" style="content:text/html; charset:utf-8">
+						<p:growl id="messages" globalOnly="true" showDetail="false" />
+						<p:outputLabel value="Todos: " />
+						<p:selectBooleanCheckbox value="#{listaAmbienteRespController.todos}">
+							<p:ajax update="@form" listener="#{listaAmbienteRespController.clickCheckListener}" />
+						</p:selectBooleanCheckbox>
+
+						<p:outputLabel for="nome" value="Nome do Ambiente" />
+						<p:inputText value="#{listaAmbienteRespController.pesquisarAmbiente}" id="nome">
+							<p:ajax event="click" update="@form" listener="#{listaAmbienteRespController.clickListener}" />
+						</p:inputText>
+						<div class="h10 cleaner"></div>
+							
+						<p:commandButton value="Atualizar" update="@form" style="margin-left: 151.7px"/>
+						<div class="h10 cleaner"></div>
+						
+						<p:dataTable id="basic" rendered="#{not empty listaAmbienteRespController.pesquisarAmbiente}"
+						value="#{listaAmbienteRespController.pAmbiente}" var="ambiente">
+							<p:column>
+								<p:commandButton update="@form" oncomplete="PF('ambienteDialog').show()" 
+								title="View Detail" icon="ui-icon-search" style="margin-left:50px">
+									<f:setPropertyActionListener value="#{ambiente}" 
+									target="#{listaAmbienteRespController.selectedAmbiente}" />
+								</p:commandButton>
+							</p:column>
+							<p:column headerText="Nome">
+								<h:outputText value="#{ambiente.nome}" style="display:inline-block" />
+							</p:column>
+							<p:column headerText="Andar">
+								<h:outputText value="#{ambiente.andar}" style="display:inline-block" />
+							</p:column>
+						</p:dataTable>
+
+
+						<p:dataTable id="basicTodos" rendered="#{listaAmbienteRespController.todos == true}"
+						value="#{listaAmbienteRespController.listAmbiente}" var="ambiente"
+						paginator="true" rowsPerPageTemplate="10,15,20" rows="10">
+							<p:column>
+								<p:commandButton update="@form" oncomplete="PF('ambienteDialog').show()" 
+								title="View Detail" icon="ui-icon-search" style="margin-left:50px">
+									<f:setPropertyActionListener value="#{ambiente}"
+									target="#{listaAmbienteRespController.selectedAmbiente}" />
+								</p:commandButton>
+							</p:column>
+							<p:column headerText="Nome">
+								<h:outputText value="#{ambiente.nome}" style="display:inline-block" />
+							</p:column>
+							<p:column headerText="Andar">
+								<h:outputText value="#{ambiente.andar}" style="display:inline-block" />
+							</p:column>
+						</p:dataTable>
+							
+						<p:dialog header="Informações do Ambiente" id="dialogo" widgetVar="ambienteDialog"
+						modal="true" showEffect="blind" hideEffect="explode" resizable="true">
+							<p:outputPanel id="ambienteDet" style="text-align:center;">
+								<p:panelGrid columns="2" rendered="#{not empty listaAmbienteRespController.selectedAmbiente}"
+								columnClasses="label,value">
+									<f:facet name="header">
+										<p:outputLabel value="Detalhes" style="width: 410px; margin-left: 99px" />
+									</f:facet>
+									<p:panelGrid columns="2" style="width:567.2px">
+										<p:outputLabel value="Nome:" style="margin-left: 53px" />
+										<p:outputLabel value="#{listaAmbienteRespController.selectedAmbiente.nome}" />
+										<p:outputLabel value="Andar:" style="margin-left: 53px" />
+										<p:outputLabel value="#{listaAmbienteRespController.selectedAmbiente.andar}" />
+										<p:outputLabel value="Responsável:" style="margin-left: 53px" />
+										<p:outputLabel value="#{listaAmbienteRespController.selectedAmbiente.responsavel}" />
+									</p:panelGrid>
+								</p:panelGrid>
+								<p:panelGrid columns="2" style="width:450px" 
+								rendered="#{listaAmbienteRespController.selectedAmbiente.status == true}">
+									<f:facet name="header">
+										<p:outputLabel value="Patrimonios no local" style="width: 510px; margin-left: 45px" />
+									</f:facet>
+									<p:panelGrid columns="2">
+										<p:dataTable emptyMessage="Nenhum Patrimônio no local."
+										rowKey="#{patrimonio}" id="tablePatrimonios"
+										selection="#{listaAmbienteRespController.selectedPatrimonios}"
+										value="#{listaAmbienteRespController.ambiente.patrimonios}"
+										rendered="#{not empty listaAmbienteRespController.selectedAmbiente}"
+										var="patrimonio" type="unordered" scrollable="true" style="margin-left: 37px"
+										paginator="true" rowsPerPageTemplate="10,15,20" rows="10">
+											<p:column selectionMode="multiple" style="width:15px;" />
+											<p:column headerText="Número" style="width: 75px">
+												<h:outputText value="#{patrimonio.cdPatrimonio}" />
+											</p:column>
+											<p:column headerText="Tipo" style="width: 100px">
+												<h:outputText value="#{patrimonio.modelo.tipo.descricao}" />
+											</p:column>
+											<p:column headerText="Modelo" style="width: 100px">
+												<h:outputText value="#{patrimonio.modelo.nome}" />
+											</p:column>
+											<p:column headerText="Ambiente" style="width: 100px">
+												<h:outputText value="#{patrimonio.ambiente.nome}" />
+											</p:column>
+											<f:facet name="footer">
+												<p:commandButton 
+												action="#{listaAmbienteRespController.prepararMovimentacao}"
+												value="Detalhes da Movimentação" />
+												<p:commandButton value="Dar baixa" 
+												action="#{listaAmbienteRespController.verificarPatrimoniosSelecionados}"
+												icon="ui-icon-circle-close" update=":form:messages">
+												</p:commandButton>
+											</f:facet>
+										</p:dataTable>
+									</p:panelGrid>
+								</p:panelGrid>
+							</p:outputPanel>
+						</p:dialog>
+					</h:form>
+				</div>
+			</div>
+			<div class="cleaner"></div>
+		</div>
+	</div>
+</ui:define>
+</ui:composition>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="QRCode" columnCount="3" pageWidth="595" pageHeight="842" columnWidth="185" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="62d1f8ac-d99e-4950-8014-85dd495c0aa0">
+	<property name="template.type" value="columnar"/>
+	<property name="ireport.zoom" value="1.6105100000000079"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#000000" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<subDataset name="DATA" uuid="dd1fd427-a1cc-49a6-beae-be7ea02f62cf">
+		<queryString language="SQL">
+			<![CDATA[SELECT
+     patrimonio.`cdPatrimonio` AS barcode_text
+FROM
+     `patrimonio` patrimonio]]>
+		</queryString>
+		<field name="barcode_text" class="java.lang.String"/>
+		<variable name="BarCodeImage" class="java.awt.image.BufferedImage" calculation="System"/>
+		<variable name="BarCodeString" class="java.lang.String" calculation="System"/>
+		<variable name="EnderecoEmpresa" class="java.lang.String"/>
+		<variable name="LogoTipo" class="java.awt.image.BufferedImage" calculation="System"/>
+	</subDataset>
+	<scriptlet name="QRCodeScriptlet" class="br.senai.sp.cfp132.PineappleSystems.Util.QRCodeScriptlet"/>
+	<field name="cdPatrimonio" class="java.lang.String"/>
+	<field name="tipo" class="java.lang.String"/>
+	<field name="modelo" class="java.lang.String"/>
+	<variable name="BarCodeImage" class="java.awt.image.BufferedImage" calculation="System"/>
+	<variable name="BarCodeString" class="java.lang.String" calculation="System"/>
+	<variable name="EnderecoEmpresa" class="java.lang.String" calculation="System"/>
+	<variable name="LogoTipo" class="java.awt.image.BufferedImage" calculation="System"/>
+	<variable name="NomeEmpresa" class="java.lang.String" calculation="System"/>
+	<variable name="Cnpj" class="java.lang.String"/>
+	<variable name="modelo" class="java.lang.String"/>
+	<variable name="tipo" class="java.lang.String"/>
+	<group name="Group1">
+		<groupExpression><![CDATA[(int)($V{REPORT_COUNT}/15)]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="113">
+			<image hAlign="Left" vAlign="Middle">
+				<reportElement x="0" y="0" width="99" height="87" uuid="a2c8b798-0b9d-4949-9874-ff51ec4bc526"/>
+				<imageExpression><![CDATA[$V{BarCodeImage}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="1" y="87" width="181" height="20" uuid="9d57e366-e8fa-4325-a56c-09da0e31931d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{BarCodeString}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="99" y="10" width="83" height="20" uuid="74ae6c95-e573-4c73-acf8-d6b88230ab3d"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{tipo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="99" y="46" width="83" height="20" uuid="807a26eb-e9a1-4be0-a17f-fd677901cc98"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{modelo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

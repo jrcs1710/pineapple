@@ -1,0 +1,153 @@
+﻿<ui:composition 
+	template="../templates/template_funcionarios.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<ui:define name="conteudo">
+	<div id="tooplate_middle">
+		<div id="mid_title_15">Histórico</div>
+	</div>
+	<div id="tooplate_main">
+		<div class="col_w900">
+			<div class="col_w450 float_l" style="margin-left: 130px">
+				<div id="cp_contact_form" style="margin-left: 0px">
+					<h:form method="post" style="content:text/html; charset:utf-8">
+						<p:growl id="messages" showDetail="false" />
+						<div class="ui-grid ui-grid-responsive">
+							<div class="ui-grid-row">
+								<div class="ui-grid-col-1">
+						<p:outputLabel value="Aprovados: " />
+						<p:selectBooleanCheckbox value="#{listaRequisicaoRespController.aprovado}">
+							<p:ajax update="@form" listener="#{listaRequisicaoRespController.aprovadoListener}" />
+						</p:selectBooleanCheckbox>
+								</div>
+								
+							<div class="ui-grid-col-1">
+						<p:outputLabel value="Recusados: " />
+						<p:selectBooleanCheckbox value="#{listaRequisicaoRespController.recusado}">
+							<p:ajax update="@form" listener="#{listaRequisicaoRespController.recusadoListener}" />
+						</p:selectBooleanCheckbox>
+							</div>
+							</div>
+							</div>
+							<div class="h10 cleaner"></div>
+						<p:tabView scrollable="true" rendered="#{listaRequisicaoRespController.aprovado == true}">
+							<c:forEach items="#{listaRequisicaoRespController.listSolicitacaoAprovada}" var="solicitacao">
+								<p:tab title="#{solicitacao.status.toString()}">
+									<p:outputPanel>
+										<p:panelGrid columns="2" style="margin-left: 175px">
+											<p:outputLabel value="Ambiente Atual:" />
+											<p:outputLabel value="#{solicitacao.atual}" />
+											<p:outputLabel value="Ambiente destino:" />
+											<p:outputLabel value="#{solicitacao.destino}"
+											rendered="#{not empty solicitacao.destino}" />
+											<p:outputLabel value="Baixa do patrimônio"
+											rendered="#{empty solicitacao.destino}" />
+											<p:outputLabel value="Data da solicitação:" />
+											<p:outputLabel value="#{solicitacao.dtSolicitacao.time}">
+												<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-03:00" />
+											</p:outputLabel>
+											<p:outputLabel value="Observações:" />
+											<p:outputLabel value="#{solicitacao.obsSolicitante}" />
+										</p:panelGrid>
+										<div class="h10 cleaner"></div>
+										
+										<p:dataTable id="patTable" var="item" rowKey="#{patrimonio}"
+										scrollable="true" emptyMessage="Nenhum registro encontrado"
+										value="#{solicitacao.patrimonios}" resizableColumns="true" style="margin-bottom:20px">
+											<f:facet name="header">
+												Patrimônios Solicitados
+											</f:facet>
+											<p:column headerText="Número">
+												<h:outputText value="#{item.patrimonio.cdPatrimonio}" />
+											</p:column>
+											<p:column headerText="Tipo">
+												<h:outputText value="#{item.patrimonio.modelo.tipo.descricao}" />
+											</p:column>
+											<p:column headerText="Modelo">
+												<h:outputText value="#{item.patrimonio.modelo.nome}" />
+											</p:column>
+										</p:dataTable>
+										<p:panelGrid columns="2" style="width: 660px">
+											<f:facet name="header">
+												Considerações do Avaliador
+											</f:facet>
+											<p:outputLabel value="Avaliador:" />
+											<p:outputLabel value="#{solicitacao.avaliador.nome}" />
+											<p:outputLabel value="Data da Avaliação:" />
+											<p:outputLabel value="#{solicitacao.dataAprovacao.time}">
+												<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-03:00" />
+											</p:outputLabel>
+											<p:outputLabel value="Observações:" />
+											<p:outputLabel value="#{solicitacao.obsAprovador}" />
+										</p:panelGrid>
+									</p:outputPanel>
+								</p:tab>
+							</c:forEach>
+						</p:tabView>
+
+						<p:tabView scrollable="true" rendered="#{listaRequisicaoRespController.recusado == true}">
+							<c:forEach items="#{listaRequisicaoRespController.listSolicitacaoRecusada}" var="solicitacao">
+								<p:tab title="#{solicitacao.status.toString()}">
+									<p:outputPanel>
+										<p:panelGrid columns="2" style="margin-left: 175px">
+											<p:outputLabel value="Ambiente Atual:" />
+											<p:outputLabel value="#{solicitacao.atual}" />
+											<p:outputLabel value="Ambiente destino:" />
+											<p:outputLabel value="#{solicitacao.destino}"
+											rendered="#{not empty solicitacao.destino}" />
+											<p:outputLabel value="Baixa do patrimônio"
+											rendered="#{empty solicitacao.destino}" />
+											<p:outputLabel value="Data da solicitação:" />
+											<p:outputLabel value="#{solicitacao.dtSolicitacao.time}">
+												<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-03:00" />
+											</p:outputLabel>
+											<p:outputLabel value="Observações:" />
+											<p:outputLabel value="#{solicitacao.obsSolicitante}" />
+										</p:panelGrid>
+										
+										<p:dataTable id="patTable" var="item" rowKey="#{patrimonio}"
+										scrollable="true" emptyMessage="Nenhum registro encontrado"
+										value="#{solicitacao.patrimonios}" resizableColumns="true" style="margin-bottom:20px">
+											<f:facet name="header">
+												Patrimônios Solicitados
+											</f:facet>
+											<p:column headerText="Número">
+												<h:outputText value="#{item.patrimonio.cdPatrimonio}" />
+											</p:column>
+											<p:column headerText="Tipo">
+												<h:outputText value="#{item.patrimonio.modelo.tipo.descricao}" />
+											</p:column>
+											<p:column headerText="Modelo">
+												<h:outputText value="#{item.patrimonio.modelo.nome}" />
+											</p:column>
+										</p:dataTable>
+										<p:panelGrid columns="2" style="width: 660px">
+											<f:facet name="header">
+												Considerações do Avaliador
+											</f:facet>
+											<p:outputLabel value="Avaliador:" />
+											<p:outputLabel value="#{solicitacao.avaliador.nome}" />
+											<p:outputLabel value="Data da Avaliação:" />
+											<p:outputLabel value="#{solicitacao.dataAprovacao.time}">
+												<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-03:00" />
+											</p:outputLabel>
+											<p:outputLabel value="Observações:" />
+											<p:outputLabel value="#{solicitacao.obsAprovador}" />
+										</p:panelGrid>
+									</p:outputPanel>
+								</p:tab>
+							</c:forEach>
+						</p:tabView>
+					</h:form>
+				</div>
+			</div>
+			<div class="cleaner"></div>
+		</div>
+	</div>
+</ui:define>
+</ui:composition>

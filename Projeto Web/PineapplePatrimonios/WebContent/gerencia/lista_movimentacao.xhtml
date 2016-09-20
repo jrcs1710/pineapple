@@ -1,0 +1,81 @@
+﻿<ui:composition 
+	template="../templates/template_gerencia.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:define name="conteudo">
+	<div id="tooplate_middle">
+		<div id="mid_title_3">Lista de Movimentações</div>
+	</div>
+	<div id="tooplate_main">
+		<div class="col_w900">
+					<h:form method="post" id="form" style="content:text/html; charset:utf-8">
+						<p:growl id="messages" globalOnly="true" showDetail="false" />
+						<p:dataTable var="requisicao" paginator="true" widgetVar="tblMovimentacao" 
+						rowsPerPageTemplate="10,15,20" rows="10" style="width:960px" 
+						value="#{listaHistoricoRequisicoesController.listRequisicoes}">
+							<f:facet name="header" style="width:100px">
+           					 	Expanda para mais informações
+        					</f:facet>
+							<p:column style="width:16px">
+								<p:rowToggler />
+							</p:column>
+							<p:column headerText="Solicitante" filterBy="#{requisicao.solicitante.nome}" style="width:100px; text-align:center">
+								<h:outputText value="#{requisicao.solicitante.nome}" />
+							</p:column>
+							<p:column headerText="Data da Solicitação" style="width:100px; text-align:center" > 
+								<h:outputText value="#{requisicao.dtSolicitacao.time}">
+									<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-03:00" />
+								</h:outputText>
+							</p:column>
+							<p:column headerText="Avaliador" filterBy="#{requisicao.dataAprovacao.time}" style="width:100px; text-align:center">
+								<h:outputText value="#{requisicao.avaliador.nome}" />
+							</p:column>
+							<p:column headerText="Data da Avaliação" style="width:100px; text-align:center">
+								<h:outputText value="#{requisicao.dataAprovacao.time}">
+									<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-03:00" />
+								</h:outputText>
+							</p:column>
+							<p:column headerText="Local" filterBy="#{requisicao.atual.nome}" style="width:100px; text-align:center">
+								<h:outputText value="#{requisicao.atual.nome}" rendered="#{not empty requisicao.atual}"/>
+								<h:outputText value="Baixa de patrimônio" rendered="#{empty requisicao.atual}"/>
+							</p:column>
+							<p:column headerText="Destino" filterBy="#{requisicao.destino.nome}" style="width:100px; text-align:center">
+								<h:outputText value="#{requisicao.destino.nome}" rendered="#{not empty requisicao.destino}"/>
+								<h:outputText value="Baixa de patrimônio" rendered="#{empty requisicao.destino}"/>
+							</p:column>
+							<p:column headerText="Status" filterBy="#{requisicao.status}"
+									style="width:100px; text-align:center">
+									<h:outputText value="#{requisicao.status.toString()}" />
+							</p:column>
+							
+							<p:rowExpansion>
+								<p:dataTable var="item" value="#{requisicao.patrimonios}">
+									<p:column headerText="Número">
+										<h:outputText value="#{item.patrimonio.cdPatrimonio}" />
+									</p:column>
+									<p:column headerText="Modelo">
+										<h:outputText value="#{item.patrimonio.modelo.nome}" />
+									</p:column>
+									<p:column headerText="Tipo">
+										<h:outputText value="#{item.patrimonio.modelo.tipo.descricao}" />
+									</p:column>
+								</p:dataTable>
+								<p:panelGrid columns="2" style="border: 1px solid #18181f">
+									<f:facet name="header"> Observações </f:facet>
+									<p:outputLabel value="Considerações do Solicitante"/>
+									<p:outputLabel value="#{requisicao.obsSolicitante}" />
+									<p:outputLabel value="Considerações do Avaliador"/>
+									<p:outputLabel value="#{requisicao.obsAprovador}" />
+								</p:panelGrid>
+							</p:rowExpansion>
+						</p:dataTable>
+					</h:form>
+				</div>
+			</div>
+			<div class="cleaner"></div>
+</ui:define>
+</ui:composition>

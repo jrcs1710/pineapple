@@ -1,0 +1,52 @@
+﻿<ui:composition 
+	template="../templates/template_gerencia.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+<ui:define name="conteudo">
+	<div id="tooplate_middle">
+		<div id="mid_title_9">Cadastro de Modelos</div>
+	</div>
+	<div id="tooplate_main">
+		<div class="col_w900">
+			<div class="col_w450_2 float_l">
+				<div id="cp_contact_form">
+					<h:form method="post" style="content:text/html; charset:utf-8">
+						<p:growl id="messages" showDetail="false" />
+						<h:inputHidden value="#{cadModeloController.modelo.id}"/>
+							
+						<h:outputLabel for="tipo_mod" value="Tipo: " />
+						<p:selectOneMenu id="tipo_mod" value="#{cadModeloController.id}"
+						requiredMessage="Selecione um tipo" style="width:398px" required="true">
+							<f:selectItem itemLabel="Tipo do Modelo" itemValue="" noSelectionOption="false" />
+							<f:selectItems value="#{cadModeloController.listTipo}" var="tipo" itemValue="#{tipo.id}"/>
+						</p:selectOneMenu>
+
+						<h:outputLabel value="Nome:" for="desc_modelo" />
+						<p:inputText id="desc_modelo" required="true" 
+						requiredMessage="Insira o nome" value="#{cadModeloController.modelo.nome}" />
+
+						<h:outputLabel for="foto" value="Imagem do Modelo:" />
+						<p:fileUpload id="foto" fileUploadListener="#{cadModeloController.carregarImagem}"
+						mode="advanced" update="imgPanel" auto="true" fileLimit="1" sizeLimit="500000" 
+						allowTypes="/(\.|\/)(gif|jpe?g|png)$/" dragDropSupport="true" />
+						<div class="cleaner h20"></div>
+						
+						<h:panelGrid id="imgPanel">
+							<h:graphicImage rendered="#{not empty cadModeloController.modelo.foto}"
+							value="data:image/jpg;base64,#{cadModeloController.modelo.foto64}" style="width:200px; height:200px" />
+						</h:panelGrid>
+						
+						<h:commandButton value="Cadastrar" id="btn_cad_amb"
+						actionListener="#{cadModeloController.salvar}" class="submit_btn float_l" />
+					</h:form>
+				</div>
+			</div>
+			<div class="cleaner"></div>
+		</div>
+	</div>
+</ui:define >
+</ui:composition >

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:src="@drawable/background5" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:fillViewport="true" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/tvUsuario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="3dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="5dp"
+                android:labelFor="@+id/etUsuario"
+                android:shadowColor="#000000"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="2"
+                android:text="@string/usuario"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#ccc"
+                android:textSize="25sp" />
+
+            <EditText
+                android:id="@+id/etUsuario"
+                android:layout_width="match_parent"
+                android:layout_height="39dp"
+                android:layout_marginEnd="3dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/bg_edit"
+                android:inputType="text"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:textColor="#aaa"
+                android:textCursorDrawable="@null" />
+
+            <TextView
+                android:id="@+id/tvSenha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="3dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="10dp"
+                android:labelFor="@+id/etSenha"
+                android:shadowColor="#000000"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="2"
+                android:text="@string/senha"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#ccc"
+                android:textSize="25sp" />
+
+            <EditText
+                android:id="@+id/etSenha"
+                android:layout_width="match_parent"
+                android:layout_height="39dp"
+                android:layout_marginEnd="3dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/bg_edit"
+                android:inputType="textPassword"
+                android:paddingEnd="5dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:paddingStart="5dp"
+                android:textColor="#aaa"
+                android:textCursorDrawable="@null" />
+
+            <RelativeLayout
+                android:id="@+id/layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <CheckBox
+                    android:id="@+id/chkExibir"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp" />
+
+                <TextView
+                    android:id="@+id/tvExibir"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/chkExibir"
+                    android:layout_alignStart="@id/chkExibir"
+                    android:layout_alignTop="@id/chkExibir"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="30dp"
+                    android:clickable="true"
+                    android:onClick="checkarExibir"
+                    android:shadowColor="#000000"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:shadowRadius="2"
+                    android:text="@string/exibir_senha"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="#ccc" />
+
+                <CheckBox
+                    android:id="@+id/chkManter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/chkExibir"
+                    android:layout_marginTop="5dp" />
+
+                <TextView
+                    android:id="@+id/tvManter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/chkManter"
+                    android:layout_alignStart="@id/chkManter"
+                    android:layout_alignTop="@id/chkManter"
+                    android:layout_below="@id/tvExibir"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="30dp"
+                    android:clickable="true"
+                    android:onClick="checkarManter"
+                    android:shadowColor="#000000"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:shadowRadius="2"
+                    android:text="@string/manter"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="#ccc" />
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/btEsqueci"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/button_boarder"
+                android:onClick="esqueci"
+                android:shadowColor="#000000"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="2"
+                android:text="@string/esqueci"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#ccc" />
+
+            <Button
+                android:id="@+id/btEntrar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/button_boarder"
+                android:onClick="entrar"
+                android:shadowColor="#000000"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="2"
+                android:text="@string/entrar"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#ccc" />
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <string name="app_name">Pineapple Systems</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="usuario">Usuário:</string>
+    <string name="email">E-mail:</string>
+    <string name="email_enviado">E-mail enviado com sucesso</string>
+    <string name="senha">Senha:</string>
+    <string name="esqueci">Esqueci minha senha</string>
+    <string name="entrar">Entrar</string>
+    <string name="enviar">Enviar</string>
+    <string name="enviar_requisicao">Enviar requisições</string>
+    <string name="transf_pat">Transferir patrimônios</string>
+    <string name="finalizar_conf">Finalizar conferência</string>
+    <string name="exibir_senha">Exibir senha</string>
+    <string name="manter">Manter conectado</string>
+    <string name="toast_vazio">Preencha todos os campos</string>
+    <string name="campo_vazio">Campo vazio</string>
+    <string name="usuario_invalido">Usuário inválido</string>
+    <string name="usuario_email_invalido">Usuário e/ou e-mail inválidos</string>
+    <string name="senha_nova">Alteração feita com sucesso, a senha nova está disponível no seu e-mail</string>
+    <string name="connect_exception">Falha na conexão, verifique o endereço do servidor e tente novamente</string>
+    <string name="auditoria">Efetuar auditoria</string>
+    <string name="conferencia">Efetuar conferência</string>
+    <string name="nrConferencia">Número da conferência</string>
+    <string name="nrAuditoria">Número da auditoria</string>
+    <string name="movimentacoes">Gerenciar movimentações</string>
+    <string name="relatorio">Gerar relatório</string>
+    <string name="data_solic">Data da solicitação</string>
+    <string name="falha_conexao">Falha na conexão, verifique-a e tente novamente</string>
+    <string name="observacoes_sol">Observações do solicitante:</string>
+    <string name="observacoes_ava">Suas observações:</string>
+    <string name="rejeitar">Rejeitar</string>
+    <string name="aprovar">Aprovar</string>    
+    <string name="escanear">Escanear</string> 
+    <string name="nrConfInvalido">Número de conferência inválido</string>
+    <string name="nrAuditInvalido">Número de auditoria inválido</string>
+    <string name="nao_e_resp">Você não é responsável por nenhum ambiente ou já realizou todas as suas conferências</string>
+    <string name="conf_realizadas">Todas as conferências já foram realizadas</string>
+    <string name="cdPatAdicionado">Patrimônio %1$s adicionado</string>
+    <string name="salvar_conf">Salvar conferência</string>
+    <string name="salvar_audit">Salvar auditoria</string>
+    <string name="conf_salva_sucesso">Conferência feita com sucesso!</string>
+    <string name="audit_salva_sucesso">Auditoria salva com sucesso!</string>
+    <string name="cdPatDuplicado">Patrimônio duplicado</string>
+    <string name="lista_conf_vazia">Nenhum código foi registrado</string>
+    <string name="sair">Sair</string>
+    <string name="sim">Sim</string>
+    <string name="nao">Não</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="endereco_incorreto">Endereço incorreto</string>
+    <string name="hint_WS">Exemplo: 192.168.1.1:8080</string>
+    <string name="alterar_senha">Alterar senha</string>
+            
+    <plurals name="resposta_conf">
+        <item quantity="one">O código não é referente a nenhum patrimônio registrado</item>
+        <item quantity="other">Os códigos não são referentes aos patrimônios registrados no sistema</item>        
+    </plurals>
+
+</resources>

@@ -1,0 +1,82 @@
+﻿<ui:composition 
+	template="../templates/template_gerencia.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+<ui:define name="conteudo">
+	<div id="tooplate_middle">
+		<div id="mid_title_8">Informações da Empresa</div>
+	</div>
+	<div id="tooplate_main">
+		<div class="col_w900">
+			<div class="col_w450_2 float_l">
+				<div id="cp_contact_form">
+					<h:form method="post" style="content:text/html; charset:utf-8">
+						<p:growl id="messages" showDetail="false" />
+						<h:inputHidden value="#{empresaController.empresa.id}" />
+						
+						<h:outputLabel for="nome_emp" value=" Razão Social:" />
+						<p:inputText type="text" id="nome_emp" styleClass="input_field"
+						required="true" value="#{empresaController.empresa.nome}" requiredMessage="Insira a razão social." />
+						<div class="cleaner h10"></div>
+
+						<h:outputLabel for="cnpj_emp" value=" CNPJ:" />
+						<p:inputMask id="cnpj_emp" mask="99.999.999/9999-99" required="true" 
+						styleClass="input_field" value="#{empresaController.empresa.cnpj}" requiredMessage="Insira o CNPJ." />
+						<div class="cleaner h10"></div>
+
+						<h:outputLabel for="end_emp" value=" Endereço / Nº :" />
+						<p:inputText type="text" id="end_emp" style="width:320px" 
+						styleClass="input_field" value="#{empresaController.empresa.rua}" required="true" />
+						<p:inputText type="text" id="num_emp" style="width:50px; margin-left: 5px" styleClass="input_field" 
+						value="#{empresaController.empresa.numero}" required="true" requiredMessage="Insira o número" />
+						<div class="cleaner h10"></div>
+
+						<h:outputLabel for="bairro_emp" value=" Bairro:" />
+						<p:inputText type="text" id="bairro_emp" styleClass="input_field"
+						value="#{empresaController.empresa.bairro}" required="true" requiredMessage="Insira o bairro." />
+						<div class="cleaner h10"></div>
+
+						<h:outputLabel for="cidade_emp" value=" Cidade:" />
+						<p:inputText type="text" id="cidade_emp" styleClass="input_field" 
+						value="#{empresaController.empresa.cidade}" required="true" requiredMessage="Insira a cidade." />
+						<div class="cleaner h10"></div>
+
+						<h:outputLabel for="estado_emp" value=" Estado:" />
+						<p:inputText type="text" id="estado_emp" styleClass="input_field"
+						value="#{empresaController.empresa.estado}" required="true" requiredMessage="Insira o estado." />
+						<div class="cleaner h10"></div>
+
+						<h:outputLabel for="mascara_emp" value=" Padrão do nº de patrimônio:" />
+						<p:inputText type="text" id="mascara_emp" styleClass="input_field"
+						value="#{empresaController.empresa.mascara}" required="true"
+						requiredMessage="Insira o padrão do nº de patrimônio." validatorMessage="O valor precisa ser em números.">
+						 <f:validateRegex pattern="[0-9]+" />
+						</p:inputText>
+						<div class="cleaner h10"></div>
+
+						<h:outputLabel for="logo_emp" value=" Logotipo da Empresa:" />
+						<p:fileUpload id="logo_emp" fileUploadListener="#{empresaController.carregarLogo}"
+						mode="advanced" update="imgPanel messages" auto="true" fileLimit="1" 
+						sizeLimit="500000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" dragDropSupport="true" />
+						<div class="cleaner h20"></div>
+							
+						<h:panelGrid id="imgPanel">
+							<h:graphicImage rendered="#{not empty empresaController.empresa.logotipo}"
+							value="data:image/jpg;base64,#{empresaController.empresa.foto64}" style="width:200px; height:200px" />
+						</h:panelGrid>
+
+						<h:commandButton value="Cadastrar" id="submit" 
+						action="#{empresaController.salvarEmpresa}" class="submit_btn float_l" />
+						<div class="cleaner h20"></div>
+					</h:form>
+				</div>
+			</div>
+			<div class="cleaner"></div>
+		</div>
+	</div>
+</ui:define >
+</ui:composition >

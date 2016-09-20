@@ -1,0 +1,47 @@
+﻿<ui:composition 
+	template="../templates/template_gerencia.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+<ui:define name="conteudo">
+	<div id="tooplate_middle">
+		<div id="mid_title_6">Cadastro de Ambientes</div>
+	</div>
+	<div id="tooplate_main">
+		<div class="col_w900">
+			<div class="col_w450_2 float_l">
+				<div id="cp_contact_form" style="margin-left: 163px">
+					<h:form method="post" style="content:text/html; charset:utf-8">
+						<p:growl id="messages" showDetail="false" />
+						<h:inputHidden value="${cadAmbienteController.ambiente.id}"/>
+						
+						<p:outputLabel for="nome_amb" value="Nome:" />
+						<p:inputText value="#{cadAmbienteController.ambiente.nome}" id="nome_amb" 
+						styleClass="input_field" required="true" requiredMessage="Insira o nome" />
+						<div class="cleaner h10"></div>
+
+						<p:outputLabel for="andar_amb" value="Andar:" />
+						<p:inputMask id="andar_amb" mask="9º" required="true" styleClass="input_field"
+						value="#{cadAmbienteController.ambiente.andar}" requiredMessage="Insira o andar." />	
+						<div class="cleaner h10"></div>
+
+						<p:outputLabel for="resp_amb" value="Responsável: " />
+						<p:selectOneMenu id="resp_amb" value="#{cadAmbienteController.id}"
+						requiredMessage="Selecione um responsável" style="width:398px" required="true">
+							<f:selectItem itemLabel="Responsável pelo Ambiente" itemValue="" noSelectionOption="false" />
+							<f:selectItems value="#{cadAmbienteController.func}" var="func" itemValue="#{func.id}" />		
+						</p:selectOneMenu>
+
+						<h:commandButton value="Cadastrar" id="btn_cad_amb"
+						actionListener="#{cadAmbienteController.salvar}" class="submit_btn float_l" />
+					</h:form>
+				</div>
+			</div>
+			<div class="cleaner"></div>
+		</div>
+	</div>
+</ui:define>
+</ui:composition>

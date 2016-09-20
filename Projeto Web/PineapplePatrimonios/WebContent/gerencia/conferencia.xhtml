@@ -1,0 +1,88 @@
+﻿<ui:composition template="../templates/template_gerencia.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="conteudo">
+		<div id="tooplate_middle">
+			<div id="mid_title_5">Conferências</div>
+		</div>
+		<div id="tooplate_main">
+			<div class="col_w900">
+				<div class="col_w450_2 float_l">
+					<div id="cp_contact_form">
+						<h:form method="post" style="content:text/html; charset:utf-8">
+
+							<p:dataTable var="conf"
+								value="#{conferenciaController.listConfGer}">
+								<p:column style="width:16px">
+									<p:rowToggler />
+								</p:column>
+								<p:column headerText="Número da conferência">
+									<h:outputText value="#{conf.nrConferencia}" />
+								</p:column>
+
+								<p:column headerText="Data de inicio">
+									<h:outputText value="#{conf.dtInicio.time}">
+										<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-03:00" />
+									</h:outputText>
+								</p:column>
+
+								<p:column headerText="Data final">
+									<h:outputText value="#{conf.dtFim.time}">
+										<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-03:00" />
+									</h:outputText>
+								</p:column>
+
+								<p:column headerText="Número de conferencias efetuadas">
+									<h:outputText value="#{conf.conferencia.size()}" />
+								</p:column>
+								<p:rowExpansion>
+									<p:dataTable var="confAmbiente" value="#{conf.conferencia}">
+										<p:column style="width:16px">
+											<h:commandButton update="@form"  oncomplete="PF('inconsistenciasDialog').show()">
+											<f:setPropertyActionListener target="#{conferenciaController.conferencia}" value="#{confAmbiente}"/>
+											</h:commandButton>
+										</p:column>
+										<p:column headerText="Ambiente">
+											<h:outputText value="#{confAmbiente.ambiente.nome}" />
+										</p:column>
+										<p:column headerText="Responsável">
+											<h:outputText value="#{confAmbiente.ambiente.responsavel}" />
+										</p:column>
+										                                           
+									</p:dataTable>
+								</p:rowExpansion>
+							</p:dataTable>
+					<p:dialog widgetVar="inconsistenciasDialog">
+					<p:dataTable value="#{conferenciaController.inconsistencia.itemInconsistencia}" var="inconsistencia" rendered="#{not empty conferenciaController.conferencia}">
+					<p:column headerText="Nº Patrimônio">
+					<p:outputLabel value="#{inconsistencia.patrimonio.cdPatrimonio}"/>
+					</p:column>
+					<p:column headerText="Modelo">
+					<p:outputLabel value="#{inconsistencia.patrimonio.modelo.nome}"/>
+					</p:column>
+					<p:column headerText="Tipo de inconsistencia">
+					<p:outputLabel value="#{inconsistencia.tipoInconsistencia.toString()}"/>
+					</p:column>
+					<p:column headerText="Ambiente Correto">
+					<p:outputLabel value="#{inconsistencia.patrimonio.ambiente.nome}"/>
+					</p:column>
+					
+					
+					</p:dataTable>
+					
+					
+					
+					</p:dialog>
+
+						</h:form>
+					</div>
+				</div>
+				<div class="cleaner"></div>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Pineapple Inc</title>
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<h:outputStylesheet library="css" name="tooplate_style2.css" />
+</h:head>
+<h:body>
+
+	<div id="tooplate_wrapper">
+
+		<div id="tooplate_header">
+
+			<div id="site_title">
+				<h1>
+					<a href="#">Dark Pixel</a>
+				</h1>
+			</div>
+			<div id="twitter">
+				<a href="#"></a>
+			</div>
+
+			<div id="tooplate_menu">
+				<ul>
+					<li><a href="home.xhtml">Home</a></li>
+					<li><a href="login.xhtml" class="current">Login</a></li>
+					
+				</ul>
+			</div>
+			<!-- end of tooplate_menu -->
+
+		</div>
+		<!-- end of header -->
+
+		<div id="tooplate_middle">
+			<div id="mid_title">Login</div>
+		</div>
+		<!-- end of middle -->
+
+		<div id="tooplate_main">
+			<div class="col_w900">
+
+				<div class="col_w450 float_l">
+					<div id="cp_contact_form">
+					<h:form method="post">
+						<p:growl id="messages" showDetail="true" />
+							<h:outputLabel for="login" value="Login:"/>
+							<p:inputText type="text" id="login" styleClass="input_field"
+								required="true" 
+								value="#{loginController.nome}" requiredMessage="Informe o nome de usuário"  />
+								
+							<div class="cleaner h10"></div>
+
+							<h:outputLabel for="senha" value="Senha:"/>
+							<p:inputText type="password" id="senha" styleClass="input_field"
+								required="true"  requiredMessage="Informe a senha"
+								value="#{loginController.senha}"/>
+							<div class="cleaner h10"></div>
+
+							<p:link  value="Esqueci Minha Senha">
+								<f:param name="reset_senha" value="10" />
+							</p:link>
+
+							<h:commandButton  value="Login" id="submit" 
+								class="submit_btn float_l" action="#{loginController.logar}" />
+							 <br />
+							 <h:message id="erro" for="submit"></h:message>
+						</h:form>
+
+
+					</div>
+
+				</div>
+
+				<div class="cleaner"></div>
+			</div>
+
+		</div>
+		<!-- end of main -->
+	</div>
+	<!-- end of wrapper -->
+
+	<div id="tooplate_footer_wrapper">
+		<div id="tooplate_footer">
+
+			Copyright © 2015 <a href="#">Pineapple Inc</a> - Design: <a
+				href="http://www.pudim.com.br/">Dwargar</a>
+
+		</div>
+		<!-- end of tooplate_footer -->
+	</div>
+</h:body>
+</html>

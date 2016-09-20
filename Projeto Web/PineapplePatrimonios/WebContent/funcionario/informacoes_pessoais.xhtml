@@ -1,0 +1,73 @@
+﻿<ui:composition 
+	template="../templates/template_funcionarios.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:define name="conteudo">
+	<div id="tooplate_middle">
+		<div id="mid_title_8">Informações de Cadastro</div>
+	</div>
+	<div id="tooplate_main">
+		<div class="col_w900">
+			<div class="col_w450 float_l">
+				<div id="cp_contact_form" style="margin-left: 0px">
+					<h:form method="post" style="content:text/html; charset:utf-8">
+						<p:growl id="messages" showDetail="false" />
+						<h:inputHidden value="#{informacaoPessoalController.func.id}" />
+						
+						<h:outputLabel for="nome_func" value="Nome: " />
+						<p:inputText type="text" id="nome_func" styleClass="input_field"
+						disabled="true" value="#{informacaoPessoalController.func.nome}" />
+						<div class="cleaner h10"></div>
+
+						<h:outputLabel for="email_func" value="E-Mail: " />
+						<p:inputText type="text" id="email_func" styleClass="input_field" disabled="true"
+						required="true" value="#{informacaoPessoalController.func.email}" requiredMessage="Insira a e-mail." />
+						<div class="cleaner h10"></div>
+
+						<h:outputLabel for="funcao" value="Função: " />
+						<p:selectOneMenu id="funcao" value="#{informacaoPessoalController.func.cargo}" style="width:398px" disabled="true">
+							<f:selectItem itemLabel="Selecione a Função" itemValue="" noSelectionOption="false" />
+							<f:selectItems value="#{informacaoPessoalController.cargo}" />
+						</p:selectOneMenu>
+						
+						<h:outputLabel for="usuario" value="Usuário: " />
+						<p:inputText type="text" id="usuario" styleClass="input_field"
+						value="#{informacaoPessoalController.usuario.nomeUsuario}" disabled="true" />
+						<div class="cleaner h10"></div>
+						
+						<h:outputLabel for="senha" value="Senha: " />
+						<p:password id="senha" value="#{informacaoPessoalController.senha}"
+						style="width:392px; color:#AAA" match="senha2" label="Senha:"
+						required="true" feedback="true" requiredMessage="Insira a senha."
+						promptLabel="Por favor insira a senha" weakLabel="Fraca" goodLabel="Média" 
+						strongLabel="Forte" validatorMessage="As senhas precisam ser iguais.">
+							<f:validateRegex pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{5,15})"  />
+						</p:password>
+						<div class="cleaner h10"></div>
+						
+						<h:outputLabel for="senha2" value="Confirmar Senha: " />
+						<p:password id="senha2" value="#{informacaoPessoalController.senha}"
+						style="width:392px; color:#AAA" label="Confirmar Senha"
+						required="true" feedback="true" requiredMessage="Confirme a senha."
+						validatorMessage="Tamanho mínimo 5 e máximo 15 caracteres."
+						promptLabel="Por favor insira a senha" weakLabel="Fraca" 
+						goodLabel="Média" strongLabel="Forte">
+							<f:validateRegex pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{5,15})"  />
+						</p:password>
+
+						<h:commandButton value="Salvar" id="submit"
+							action="#{informacaoPessoalController.salvar}"
+							class="submit_btn float_l" />
+						<h:message id="erro" for="submit"></h:message>
+					</h:form>
+				</div>
+			</div>
+			<div class="cleaner"></div>
+		</div>
+	</div>
+</ui:define>
+</ui:composition>

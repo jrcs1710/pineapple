@@ -1,0 +1,54 @@
+<ui:composition 
+	template="../templates/template_gerencia.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+<ui:define name="conteudo">
+	<div id="tooplate_middle">
+		<div id="mid_title_8">Confirmar Movimentação</div>
+	</div>
+	<div id="tooplate_main">
+		<div class="col_w900">
+			<div class="col_w450_2 float_l">
+				<div id="cp_contact_form">
+					<h:form method="post" id="form" style="content:text/html; charset:utf-8">
+						<p:growl id="messages" showDetail="false" />
+						<p:outputLabel value="Ambiente de destino" />
+						<p:selectOneMenu value="#{listaAmbienteController.tAmbiente}" style="width: 398px">
+							<f:selectItem noSelectionOption="false" itemLabel="Selecione" />
+							<f:selectItems value="#{listaAmbienteController.listAmbienteAtivo}" var="tAmbiente" 
+							itemValue="#{tAmbiente.id}" itemDisabled="#{tAmbiente.id == listaAmbienteController.selectedAmbiente.id}"
+							itemLabel="#{tAmbiente.nome}" />
+						</p:selectOneMenu>
+						<div class="cleaner h10"></div>
+							
+						<p:outputLabel value="Observações" />
+						<p:inputTextarea rows="10" cols="30" counter="display" 
+						maxlength="100" counterTemplate="{0} characters remaining." 
+						autoResize="false" value="#{listaAmbienteController.observacoes}" />
+						<h:outputText id="display" />
+						
+						<p:dataTable value="#{listaAmbienteController.selectedPatrimonios}"
+						var="patrimonio" emptyMessage="Nenhum registro encontrado">
+							<p:column headerText="Número">
+								<h:outputText value="#{patrimonio.cdPatrimonio}" />
+							</p:column>
+							<p:column headerText="Modelo">
+									<h:outputText value="#{patrimonio.modelo.nome}" />
+							</p:column>
+						</p:dataTable>
+						<div class="cleaner h10"></div>
+							
+						<h:commandButton value="Confirmar" id="submit"
+						action="#{listaAmbienteController.efetuarMovimentacao}" class="submit_btn float_l" />
+					</h:form>
+				</div>
+			</div>
+			<div class="cleaner"></div>
+		</div>
+	</div>
+</ui:define >
+</ui:composition >

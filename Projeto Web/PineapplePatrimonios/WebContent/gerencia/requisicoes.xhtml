@@ -1,0 +1,84 @@
+﻿<ui:composition 
+	template="../templates/template_gerencia.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<ui:define name="conteudo">
+	<div id="tooplate_middle">
+		<div id="mid_title">Requisições para Movimentação</div>
+	</div>
+	<div id="tooplate_main">
+		<div class="col_w900">
+			<div class="col_w450_2 float_l">
+				<div id="cp_contact_form" style="margin-left: 5px">
+					<h:form>
+						<p:tabView scrollable="true">
+							<c:forEach items="#{listaRequisicaoController.listSolicitacaoAberta}" var="solicitacao" >
+								<p:tab title="#{solicitacao.solicitante.nome}" >
+									<p:outputPanel>
+										<p:panelGrid columns="2" style="margin-left: 180px">
+											<p:outputLabel value="Ambiente Atual:" />
+											<p:outputLabel value="#{solicitacao.atual}" />
+											<p:outputLabel value="Ambiente destino:" />
+											<p:outputLabel value="#{solicitacao.destino}" 
+											rendered="#{not empty solicitacao.destino}" />
+											<p:outputLabel value="Baixa do patrimônio"
+											rendered="#{empty solicitacao.destino}" />
+											<p:outputLabel value="Data da solicitação:" />
+											<p:outputLabel value="#{solicitacao.dtSolicitacao.time}">
+												<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-03:00" />
+											</p:outputLabel>
+											<p:outputLabel value="Observações:" />
+											<p:outputLabel value="#{solicitacao.obsSolicitante}" />
+										</p:panelGrid>													
+										<div class="h10 cleaner"></div>
+										
+										<p:dataTable id="patTable" var="item" rowKey="#{patrimonio}" scrollable="true"
+										emptyMessage="Nenhum registro encontrado" value="#{solicitacao.patrimonios}" 
+										resizableColumns="true" style="margin-bottom:20px">
+											<p:column headerText="Número">
+												<h:outputText value="#{item.patrimonio.cdPatrimonio}" />
+											</p:column>
+											<p:column headerText="Tipo">
+												<h:outputText value="#{item.patrimonio.modelo.tipo.descricao}" />
+											</p:column>
+											<p:column headerText="Modelo">
+												<h:outputText value="#{item.patrimonio.modelo.nome}" />
+											</p:column>
+										</p:dataTable>
+										<div class="cleaner h10"></div>
+											
+										<p:outputLabel value="Observações" style="margin-left: 135px"/>
+										<p:inputTextarea value="#{listaRequisicaoController.observacao}" 
+										style="margin-left: 135px"/>
+										<h:outputText id="display" />
+										<p:panelGrid columns="2" style="margin-left: 130px">
+											<h:commandButton value="Aceitar" type="submit" id="btn_cad_amb"
+											action="#{listaRequisicaoController.aceitar}" class="submit_btn float_l"
+											style="margin: 20px 0px 0px 60.5px">
+												<f:setPropertyActionListener value="#{solicitacao}"
+												target="#{listaRequisicaoController.selectedMovimentacao}" />
+											</h:commandButton>
+											<h:commandButton value="Recusar" type="submit" id="btn_cad_amb"
+											action="#{listaRequisicaoController.recusar}" class="submit_btn float_l"
+											style="margin: 20px 0px 0px 60.5px">	
+												<f:setPropertyActionListener value="#{solicitacao}"
+												target="#{listaRequisicaoController.selectedMovimentacao}" />
+											</h:commandButton>
+										</p:panelGrid>
+									</p:outputPanel>
+								</p:tab>
+							</c:forEach>
+						</p:tabView>
+					</h:form>
+				</div>
+			</div>
+			<div class="cleaner"></div>
+		</div>
+	</div>
+</ui:define>
+</ui:composition>

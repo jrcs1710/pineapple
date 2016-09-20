@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:src="@drawable/background5" />
+
+    <LinearLayout
+        android:id="@+id/layout_audit"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="130sp"
+            android:layout_weight="15" >
+
+            <ExpandableListView
+                android:id="@+id/exp_list_audit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:childDivider="#ccc"
+                android:divider="@color/result_view"
+                android:dividerHeight="1dp"
+                android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft" >
+            </ExpandableListView>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="130sp"
+            android:layout_gravity="bottom"
+            android:layout_weight="-1" >
+
+            <EditText
+                android:id="@+id/etCdPat"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="4sp"
+                android:layout_marginEnd="4sp"
+                android:layout_marginLeft="4sp"
+                android:layout_marginRight="4sp"
+                android:layout_marginStart="4sp"
+                android:layout_marginTop="10sp"
+                android:background="@drawable/bg_edit"
+                android:inputType="number"
+                android:maxLength="45"
+                android:paddingEnd="70sp"
+                android:paddingLeft="5dp"
+                android:paddingRight="70sp"
+                android:paddingStart="5dp"
+                android:shadowColor="#000000"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="2"
+                android:textColor="#FFCC00"
+                android:textCursorDrawable="@null" />
+
+            <Button
+                android:id="@+id/btSalvarEdit"
+                android:layout_width="55sp"
+                android:layout_height="40sp"
+                android:layout_alignEnd="@id/etCdPat"
+                android:layout_alignRight="@id/etCdPat"
+                android:layout_marginBottom="12sp"
+                android:layout_marginLeft="4sp"
+                android:layout_marginStart="4sp"
+                android:layout_marginTop="10sp"
+                android:background="@drawable/button_boarder"
+                android:onClick="salvarCdEdit"
+                android:shadowColor="#000000"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="2"
+                android:text="+"
+                android:textColor="#ccc"
+                android:textSize="25sp" />
+
+            <View
+                android:id="@+id/viewSeparador"
+                android:layout_width="1sp"
+                android:layout_height="12sp"
+                android:layout_below="@id/etCdPat"
+                android:layout_centerHorizontal="true"
+                android:enabled="false"
+                android:visibility="invisible" />
+
+            <Button
+                android:id="@+id/btSalvarAudit"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@id/viewSeparador"
+                android:layout_alignRight="@id/viewSeparador"
+                android:layout_below="@id/etCdPat"
+                android:layout_marginEnd="4sp"
+                android:layout_marginStart="4sp"
+                android:layout_marginTop="4sp"
+                android:background="@drawable/button_boarder"
+                android:onClick="salvarAudit"
+                android:shadowColor="#000000"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="2"
+                android:text="@string/salvar_audit"
+                android:textColor="#ccc" />
+
+            <Button
+                android:id="@+id/btScan"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/viewSeparador"
+                android:layout_alignStart="@id/viewSeparador"
+                android:layout_below="@id/etCdPat"
+                android:layout_marginEnd="4sp"
+                android:layout_marginStart="4sp"
+                android:layout_marginTop="4sp"
+                android:background="@drawable/button_boarder"
+                android:onClick="callZXing"
+                android:shadowColor="#000000"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="2"
+                android:text="@string/escanear"
+                android:textColor="#ccc" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</FrameLayout>

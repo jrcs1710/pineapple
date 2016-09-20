@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.senai.sp.cfp132.PineappleSystems.Controller.EscolherRelatorioController">
+   <children>
+      <ImageView fitHeight="500.0" fitWidth="800.0" layoutY="100.0">
+         <image>
+            <Image url="@body_main.png" />
+         </image>
+      </ImageView>
+      <Pane prefHeight="100.0" prefWidth="800.0">
+         <children>
+            <ImageView fitHeight="100.0" fitWidth="800.0">
+               <image>
+                  <Image url="@upper_main_teste.png" />
+               </image>
+            </ImageView>
+            <Hyperlink fx:id="hlWeb" layoutX="170.0" layoutY="22.0" style="-fx-text-fill: white; -fx-font-size: 30px; " text="Web" textFill="WHITE">
+               <effect>
+                  <Glow level="0.81" />
+               </effect></Hyperlink>
+            <Hyperlink fx:id="hlAndroid" layoutX="268.0" layoutY="22.0" style="-fx-font-size: 30px;" text="App Android" textFill="WHITE">
+               <effect>
+                  <Glow level="0.81" />
+               </effect></Hyperlink>
+            
+         </children>
+      </Pane>
+      <Pane prefHeight="600.0" prefWidth="140.0" style="-fx-background-color: #ffffff07;">
+         <children>
+            <ImageView fitHeight="100.0" fitWidth="118.0" layoutX="5.0">
+               <image>
+                  <Image url="@pineapple_logo.png" />
+               </image>
+            </ImageView>
+            <Button layoutX="5.0" layoutY="158.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="110.0" style="-fx-background-color: #ffffff00;">
+               <graphic>
+                  <ImageView fitHeight="110.0" fitWidth="110.0">
+                     <image>
+                        <Image url="@print_desktop.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button layoutX="5.0" layoutY="308.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="110.0" style="-fx-background-color: #ffffff00; -fx-graphic: 'file:QRCode_desktop.png';">
+               <graphic>
+                  <ImageView fitHeight="110.0" fitWidth="110.0">
+                     <image>
+                        <Image url="@QRCode_desktop.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Button fx:id="btLogout" layoutX="5.0" layoutY="456.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="110.0" style="-fx-background-color: #ffffff00;">
+               <graphic>
+                  <ImageView fitHeight="110.0" fitWidth="110.0">
+                     <image>
+                        <Image url="@logout.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </Pane>
+      <Button fx:id="btMovimentacao" layoutX="510.0" layoutY="233.0" mnemonicParsing="false" prefHeight="193.0" prefWidth="177.0" style="-fx-background-color: #ffffff00;">
+         <graphic>
+            <ImageView fitHeight="96.0" fitWidth="200.0">
+               <image>
+                  <Image url="@movimentacoes.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="btPatrimonio" layoutX="206.0" layoutY="249.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="110.0" style="-fx-background-color: #ffffff00;">
+         <graphic>
+            <ImageView fitHeight="152.0" fitWidth="200.0">
+               <image>
+                  <Image url="@patrimonios.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+   </children>
+</AnchorPane>

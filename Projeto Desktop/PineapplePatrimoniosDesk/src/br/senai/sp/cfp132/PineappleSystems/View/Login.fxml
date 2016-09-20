@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:controller="br.senai.sp.cfp132.PineappleSystems.Controller.LoginController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="892.0" prefWidth="520.0" style="-fx-background-image: \\\10.84.146.20\Users\Tecnico_Noite\Desktop\TCC\1 - Desktop;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="892.0" fitWidth="520.0">
+         <image>
+            <Image url="@fundo_login.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="180.0" fitWidth="467.0" layoutX="31.0" layoutY="14.0">
+         <image>
+            <Image url="@pineapple_logo_final.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="tfUsuario" layoutX="81.0" layoutY="345.0" prefHeight="90.0" prefWidth="350.0" promptText="Usuario">
+         <font>
+            <Font size="32.0" />
+         </font></TextField>
+      <PasswordField fx:id="pfSenha" layoutX="81.0" layoutY="477.0" prefHeight="90.0" prefWidth="350.0" promptText="Senha">
+         <font>
+            <Font size="32.0" />
+         </font></PasswordField>
+      <Button fx:id="btLogin"  layoutX="181.0" layoutY="660.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="150.0" style="-fx-background-color: #ffffff;" text="Login" textAlignment="CENTER" textFill="#615f54">
+         <font>
+            <Font size="24.0" />
+         </font></Button>
+      <Hyperlink fx:id="linkSenha" layoutX="137.0" layoutY="593.0" text="Esqueci Minha Senha">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Hyperlink>
+      <Button fx:id="btSair" layoutX="181.0" layoutY="753.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="150.0" style="-fx-background-color: #ffffff;" text="Sair" textAlignment="CENTER" textFill="#615f54">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

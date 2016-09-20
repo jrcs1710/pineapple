@@ -1,0 +1,216 @@
+<ui:composition 
+	template="../templates/template_gerencia.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:define name="conteudo">
+	<div id="tooplate_middle">
+		<div id="mid_title_14">Lista de Modelos</div>
+	</div>
+	<div id="tooplate_main">
+		<div class="col_w900">
+			<div class="col_w450_2 float_l">
+				<div id="cp_contact_form" style="margin-left:10px">
+					<h:form method="post" id="form" style="content:text/html; charset:utf-8">
+						<p:growl id="messages" showDetail="false" />
+						<div id="cp_contact_form_pat2">
+						<div class="ui-grid ui-grid-responsive">
+							<div class="ui-grid-row">
+								<div class="ui-grid-col-1">
+						<p:outputLabel value="Todos: " />
+						<p:selectBooleanCheckbox value="#{listaModeloController.todos}">
+							<p:ajax update="@form" listener="#{listaModeloController.todosListener}" />
+						</p:selectBooleanCheckbox>
+						</div>
+						
+						<div class="ui-grid-col-1">	
+						<p:outputLabel value="Inativos: " />
+						<p:selectBooleanCheckbox value="#{listaModeloController.inativo}">
+							<p:ajax update="@form" listener="#{listaModeloController.inativosListener}" />
+						</p:selectBooleanCheckbox>
+						</div>
+						
+						<div class="ui-grid-col-1">	
+						<p:outputLabel value="Ativos: " />
+						<p:selectBooleanCheckbox value="#{listaModeloController.ativo}">
+							<p:ajax update="@form" listener="#{listaModeloController.ativosListener}" />
+						</p:selectBooleanCheckbox>
+						</div>
+						</div>
+						</div>
+							
+						<p:outputLabel for="nomeModelo" value="Código do patrimônio" />
+						<p:inputText value="#{listaModeloController.nomeModelo}" id="nomeModelo">
+							<p:ajax event="click" update="@form" listener="#{listaModeloController.nomeListener}" />
+						</p:inputText>
+						<div class="cleaner h10"></div>
+
+						<p:commandButton value="Atualizar"
+						action="#{listaModeloController.pesquisar}" 
+						update="@form" icon="ui-icon-refresh" style="margin-left:150px"/>
+						<div class="cleaner h10"></div>
+						</div>
+						
+						<p:dataGrid var="modelo" rendered="#{listaModeloController.ativo == true}"
+						emptyMessage="Nenhum registro encontrado" value="#{listaModeloController.listModeloAtivo}" 
+						columns="3" layout="grid" rows="12" paginator="true" id="ativos" rowsPerPageTemplate="6,12,16"
+						style="width: 700px; background-color: #aaa">
+							<f:facet name="header"> 
+								Modelos Ativos 
+							</f:facet>
+							<p:panel header="#{modelo.nome}" style="text-align:center">
+								<h:panelGrid columns="1" style="width:100%">
+									<p:lightBox styleClass="imagebox" id="lighbox">
+										<h:outputLink value="data:image/jpg;base64,#{modelo.foto64}">
+											<h:graphicImage value="data:image/jpg;base64,#{modelo.foto64}" height="30px" width="30px" />
+										</h:outputLink>
+									</p:lightBox>
+									<h:outputText value="#{modelo.tipo}" />
+								</h:panelGrid>
+								<h:panelGrid columns="2" class="button">
+									<h:commandButton value="Ativar"
+									action="#{listaModeloController.ativar}" 
+									rendered="#{modelo.status == false}"  styleClass="command_custom">
+										<f:setPropertyActionListener value="#{modelo}" 
+										target="#{listaModeloController.selectedModelo}" />
+									</h:commandButton>
+									<h:commandButton value="Desativar"
+									action="#{listaModeloController.desativar}"
+									rendered="#{modelo.status == true}" styleClass="command_custom">
+										<f:setPropertyActionListener value="#{modelo}" 
+										target="#{listaModeloController.selectedModelo}" />
+									</h:commandButton>
+									<h:commandButton value="Alterar" rendered="#{modelo.status == true}" 
+									action="#{listaModeloController.prepararAlteracao}" styleClass="command_custom">
+										<f:setPropertyActionListener value="#{modelo}" 
+										target="#{listaModeloController.selectedModelo}" />
+									</h:commandButton>
+								</h:panelGrid>
+							</p:panel>
+						</p:dataGrid>
+
+						<p:dataGrid var="modelo" rendered="#{listaModeloController.inativo == true}"
+						emptyMessage="Nenhum registro encontrado" value="#{listaModeloController.listModeloInativo}" 
+						columns="3" layout="grid" rows="12" paginator="true" id="inativos" rowsPerPageTemplate="6,12,16"
+						style="width: 700px; background-color: #aaa">
+							<f:facet name="header">
+								Modelos Inativos
+							</f:facet>
+							<p:panel header="#{modelo.nome}" style="text-align:center">
+								<h:panelGrid columns="1" style="width:100%">
+									<p:lightBox styleClass="imagebox" id="lighbox">
+										<h:outputLink value="data:image/jpg;base64,#{modelo.foto64}">
+											<h:graphicImage value="data:image/jpg;base64,#{modelo.foto64}" height="30px" width="30px" />
+										</h:outputLink>
+									</p:lightBox>
+									<h:outputText value="#{modelo.tipo}" />
+								</h:panelGrid>
+								<h:panelGrid columns="2" class="button">
+									<h:commandButton value="Ativar" 
+									action="#{listaModeloController.ativar}" 
+									rendered="#{modelo.status == false}" styleClass="command_custom">
+										<f:setPropertyActionListener value="#{modelo}" 
+										target="#{listaModeloController.selectedModelo}" />
+									</h:commandButton>
+									<h:commandButton value="Desativar"
+									action="#{listaModeloController.desativar}"
+									rendered="#{modelo.status == true}" styleClass="command_custom">
+										<f:setPropertyActionListener value="#{modelo}" 
+										target="#{listaModeloController.selectedModelo}" />
+									</h:commandButton>
+									<h:commandButton value="Alterar" 
+									rendered="#{modelo.status == true}" 
+									action="#{listaModeloController.prepararAlteracao}" styleClass="command_custom">
+										<f:setPropertyActionListener value="#{modelo}" target="#{listaModeloController.selectedModelo}" />
+									</h:commandButton>
+								</h:panelGrid>
+							</p:panel>
+						</p:dataGrid>
+
+						<p:dataGrid var="modelo" rendered="#{listaModeloController.todos == true}"
+						emptyMessage="Nenhum registro encontrado" value="#{listaModeloController.listModelo}" 
+						columns="3" layout="grid" rows="12" paginator="true" id="todos" rowsPerPageTemplate="6,12,16"
+						style="width: 700px; background-color: #aaa">
+							<f:facet name="header">
+								Todos os Modelos
+							</f:facet>
+							<p:panel header="#{modelo.nome}" style="text-align:center">
+								<h:panelGrid columns="1" style="width:100%">
+									<p:lightBox styleClass="imagebox" id="lighbox">
+										<h:outputLink value="data:image/jpg;base64,#{modelo.foto64}">
+											<h:graphicImage value="data:image/jpg;base64,#{modelo.foto64}" height="30px" width="30px" />
+										</h:outputLink>
+									</p:lightBox>
+									<h:outputText value="#{modelo.tipo}" />
+								</h:panelGrid>
+								<h:panelGrid columns="2" class="button" style="width:225px">
+									<h:commandButton value="Ativar" 
+									action="#{listaModeloController.ativar}" 
+									rendered="#{modelo.status == false}" styleClass="command_custom">
+										<f:setPropertyActionListener value="#{modelo}" 
+										target="#{listaModeloController.selectedModelo}" />
+									</h:commandButton>
+									<h:commandButton value="Desativar"
+									action="#{listaModeloController.desativar}"
+									rendered="#{modelo.status == true}" styleClass="command_custom">
+										<f:setPropertyActionListener value="#{modelo}"
+										target="#{listaModeloController.selectedModelo}" />
+									</h:commandButton>
+									<h:commandButton value="Alterar" 
+									rendered="#{modelo.status == true}" 
+									action="#{listaModeloController.prepararAlteracao}" styleClass="command_custom">
+										<f:setPropertyActionListener value="#{modelo}"
+										target="#{listaModeloController.selectedModelo}" />
+									</h:commandButton>
+								</h:panelGrid>
+							</p:panel>
+						</p:dataGrid>
+						
+						<p:dataGrid var="modelo" rendered="#{ not empty listaModeloController.nomeModelo}"
+						emptyMessage="Nenhum registro encontrado" value="#{listaModeloController.listModeloNome}" 
+						columns="3" layout="grid" rows="12" paginator="true" id="nome" rowsPerPageTemplate="6,12,16"
+						style="background-color: #aaa">
+							<f:facet name="header"> Modelo </f:facet>
+							<p:panel header="#{modelo.nome}" style="text-align:center">
+								<h:panelGrid columns="1" style="width:100%">
+									<p:lightBox styleClass="imagebox" id="lighbox">
+										<h:outputLink value="data:image/jpg;base64,#{modelo.foto64}">
+											<h:graphicImage value="data:image/jpg;base64,#{modelo.foto64}" height="30px" width="30px" />
+										</h:outputLink>
+									</p:lightBox>
+									<h:outputText value="#{modelo.tipo}" />
+								</h:panelGrid>
+								<h:panelGrid columns="2" class="button">
+									<h:commandButton value="Ativar"
+									action="#{listaModeloController.ativar}"
+									rendered="#{modelo.status == false}" styleClass="command_custom">
+										<f:setPropertyActionListener value="#{modelo}"
+										target="#{listaModeloController.selectedModelo}" />
+									</h:commandButton>
+									<h:commandButton value="Desativar"
+									action="#{listaModeloController.desativar}"
+									rendered="#{modelo.status == true}" styleClass="command_custom">
+										<f:setPropertyActionListener value="#{modelo}"
+										target="#{listaModeloController.selectedModelo}" />
+									</h:commandButton>
+									<h:commandButton value="Alterar" 
+									rendered="#{modelo.status == true}" 
+									action="#{listaModeloController.prepararAlteracao}"
+									styleClass="command_custom">
+										<f:setPropertyActionListener value="#{modelo}"
+										target="#{listaModeloController.selectedModelo}" />
+									</h:commandButton>
+								</h:panelGrid>
+							</p:panel>
+						</p:dataGrid>
+					</h:form>
+				</div>
+			</div>
+			<div class="cleaner"></div>
+		</div>
+	</div>
+</ui:define>
+</ui:composition>

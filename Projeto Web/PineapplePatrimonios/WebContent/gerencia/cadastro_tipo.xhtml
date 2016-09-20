@@ -1,0 +1,35 @@
+﻿<ui:composition 
+	template="../templates/template_gerencia.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+<ui:define name="conteudo">
+	<div id="tooplate_middle">
+		<div id="mid_title_11">Cadastro de Tipos</div>
+	</div>
+	<div id="tooplate_main">
+		<div class="col_w900">
+			<div class="col_w450_2 float_l">
+				<div id="cp_contact_form">
+					<h:form method="post" style="content:text/html; charset:utf-8">
+						<p:growl id="messages" showDetail="false" />
+						<h:inputHidden value="#{cadTipoController.tipo.id}"/>
+							
+						<h:outputLabel for="desc_tipo" value="Nome:"/>
+						<p:inputText id="desc_tipo" styleClass="input_field" 
+						required="true" value="#{cadTipoController.tipo.descricao}" requiredMessage="Insira o nome do Tipo" />
+						<div class="cleaner h10"></div>
+
+						<h:commandButton value="Cadastrar" id="submit" action="#{cadTipoController.salvar}" class="submit_btn float_l" />
+						<p:message id="info" for="submit"/>
+					</h:form>
+				</div>
+			</div>
+			<div class="cleaner"></div>
+		</div>
+	</div>
+</ui:define >
+</ui:composition >

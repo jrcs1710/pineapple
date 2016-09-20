@@ -1,0 +1,56 @@
+<ui:composition 
+	template="../templates/template_gerencia.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:define name="conteudo">
+	<div id="tooplate_middle">
+		<div id="mid_title_17">Baixa do Patrimônio</div>
+	</div>
+	<div id="tooplate_main">
+		<div class="col_w900">
+			<div class="col_w450_2 float_l">
+				<div id="cp_contact_form">
+					<h:form method="post" id="pForm" style="content:text/html; charset:utf-8">
+						<p:growl id="messages" showDetail="false" />
+						<p:outputLabel value="Patrimônios selecionados para efetuar baixa no sistema: " style="width: 330px"/>
+						<div class="cleaner h10"></div>
+							
+						<p:dataTable id="patTableTodos" var="patrimonio"
+						scrollable="true" emptyMessage="Nenhum registro encontrado"
+						value="#{moverPatrimonioController.listPatrimonios}"
+						resizableColumns="true" style="margin-bottom:20px">
+							<p:column headerText="Número">
+								<h:outputText value="#{patrimonio.cdPatrimonio}" />
+							</p:column>
+							<p:column headerText="Tipo">
+								<h:outputText value="#{patrimonio.modelo.tipo.descricao}" />
+							</p:column>
+							<p:column headerText="Modelo">
+								<h:outputText value="#{patrimonio.modelo.nome}" />
+							</p:column>
+							<p:column headerText="Ambiente">
+								<h:outputText value="#{patrimonio.ambiente.nome}" />
+							</p:column>
+						</p:dataTable>
+						<div class="cleaner"></div>
+
+						<h:outputLabel value="Observação:" for="desc_pat" />
+						<p:inputTextarea rows="10" cols="30" counter="display" 
+						maxlength="100" counterTemplate="{0} characters remaining." 
+						autoResize="false" value="#{moverPatrimonioController.mov.obsAprovador}" />
+						<h:outputText id="display" />
+						<div class="cleaner"></div>
+							
+						<h:commandButton value="Efetuar Baixa" action="#{moverPatrimonioController.darBaixa}" class="submit_btn float_l" />
+					</h:form>
+				</div>
+			</div>
+			<div class="cleaner"></div>
+		</div>
+	</div>
+</ui:define>
+</ui:composition>

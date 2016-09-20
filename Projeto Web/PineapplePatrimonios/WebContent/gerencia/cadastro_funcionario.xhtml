@@ -1,0 +1,96 @@
+﻿<ui:composition 
+	template="../templates/template_gerencia.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+<ui:define name="conteudo">
+	<div id="tooplate_middle">
+		<div id="mid_title_8">Cadastro de Funcionários</div>
+	</div>
+	<div id="tooplate_main">
+		<div class="col_w900">
+			<div class="col_w450_2 float_l">
+				<div id="cp_contact_form">
+					<h:form method="post" style="content:text/html; charset:utf-8">
+						<p:growl id="messages" showDetail="false" />
+						<h:inputHidden value="#{cadUsuarioController.func.id}" />
+						
+						<p:outputLabel for="nome_func" value="Nome:" />
+						<p:inputText type="text" id="nome_func" styleClass="input_field"
+						required="true" value="#{cadUsuarioController.func.nome}" requiredMessage="Insira o nome." />
+						<div class="cleaner h10"></div>
+
+						<p:outputLabel for="email_func" value="E-Mail:" />
+						<p:inputText type="text" id="email_func" styleClass="input_field"
+						required="true" value="#{cadUsuarioController.func.email}" requiredMessage="Insira a e-mail.">
+							<f:validator validatorId="custom.emailValidator" />
+						</p:inputText>
+						<div class="cleaner h10"></div>
+
+						<h:outputLabel for="funcao" value="Função: " />
+						<p:selectOneMenu id="funcao" value="#{cadUsuarioController.func.cargo}" 
+						style="width:398px" required="true" requiredMessage="Insira a função do funcionário.">
+							<f:selectItem itemLabel="Selecione a Função" itemValue="" noSelectionOption="false" />
+							<f:selectItems value="#{cadUsuarioController.cargo}" />
+						</p:selectOneMenu>
+
+						<p:outputLabel for="usuario" value="Usuário:" />
+						<p:inputText type="text" id="usuario" styleClass="input_field"
+						required="true" value="#{cadUsuarioController.nome}" requiredMessage="Insira o nome de usuário." />
+						<div class="cleaner h10"></div>
+
+						<p:outputLabel  value="Senha:" for="senha"/>
+						<p:password id="senha" value="#{cadUsuarioController.senha}" style="width:392px; 
+						color:#AAA" match="senha2" label="Senha:" required="true" feedback="true" 
+						title="A senha deve conter letras maiusculas e minusculas, numero e caractere especial"
+						requiredMessage="Insira a senha." promptLabel="Por favor insira a senha" weakLabel="Fraca"
+						goodLabel="Média" strongLabel="Forte" validatorMessage="Requisitos mínimos não atingidos." >
+							<f:validateRegex pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{5,15})"  />
+						</p:password>
+						<p:tooltip id="toolTipFocus" for="senha" showEvent="focus" hideEvent="blur" />
+						<div class="cleaner h10"></div>
+
+						<p:outputLabel  value="Confirmar Senha:" for="senha2"/>
+						<p:password id="senha2" value="#{cadUsuarioController.senha}" 
+						style="width:392px; color:#AAA" label="Confirmar Senha" required="true" 
+						feedback="true" requiredMessage="Confirme a senha." validatorMessage="Senhas não correspondem" 
+						promptLabel="Por favor insira a senha" weakLabel="Fraca" goodLabel="Média" strongLabel="Forte">
+							<f:validateRegex pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{5,15})" />
+						</p:password>
+
+						<h:commandButton value="Cadastrar" id="submit" action="#{cadUsuarioController.salvar}" class="submit_btn float_l" />
+					</h:form>
+					<script type="text/javascript">
+						PrimeFaces.validator['custom.emailValidator'] = {
+							pattern : /\S+@\S+/, validate : function(element, value) {
+								if (!this.pattern.test(value)) {
+									throw {
+										summary : 'Validation Error', detail : value + ' is not a valid email.'
+										}
+									}
+								}
+							};
+
+						PrimeFaces.validator['Email'] = {
+							pattern : /\S+@\S+/, MESSAGE_ID : 'org.primefaces.examples.validate.email.message',
+							validate : function(element, value) {
+								var vc = PrimeFaces.util.ValidationContext;
+									if (!this.pattern.test(value)) {
+										var msgStr = element.data('p-email-msg'), msg = msgStr ? {
+											summary : msgStr, detail : msgStr
+										} : vc.getMessage(this.MESSAGE_ID);
+										throw msg;
+									}
+								}
+							};
+					</script>
+				</div>
+			</div>
+			<div class="cleaner"></div>
+		</div>
+	</div>
+</ui:define >
+</ui:composition >

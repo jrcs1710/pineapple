@@ -1,0 +1,213 @@
+﻿<ui:composition 
+	template="../templates/template_gerencia.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:define name="conteudo">
+	<div id="tooplate_middle">
+		<div id="mid_title_9">Lista de Funcionários</div>
+	</div>
+	<div id="tooplate_main">
+		<div class="col_w900">
+				<div id="cp_contact_form_pat">	
+					<h:form method="post" style="content:text/html; charset:utf-8">
+						<p:growl id="messages" showDetail="false" />
+						<div id="cp_contact_form_func" style="margin-left: 292px;">
+						<div class="ui-grid ui-grid-responsive">
+							<div class="ui-grid-row">
+								<div class="ui-grid-col-1">
+						<p:outputLabel value="Todos: " />
+						<p:selectBooleanCheckbox value="#{listaFuncionarioController.todos}">
+							<p:ajax update="@form" listener="#{listaFuncionarioController.todosListener}" />
+						</p:selectBooleanCheckbox>
+						</div>
+						<div class="ui-grid-col-1">	
+						<p:outputLabel value="Inativos: " />
+						<p:selectBooleanCheckbox
+								value="#{listaFuncionarioController.inativo}">
+								<p:ajax update="@form"
+									listener="#{listaFuncionarioController.inativosListener}" />
+						</p:selectBooleanCheckbox>
+						</div>
+						<div class="ui-grid-col-1">	
+						<p:outputLabel value="Ativos: " />
+						<p:selectBooleanCheckbox value="#{listaFuncionarioController.ativo}">
+							<p:ajax update="@form" listener="#{listaFuncionarioController.ativosListener}" />
+						</p:selectBooleanCheckbox>
+						</div>
+						</div>
+						</div>
+						<div class="cleaner h10"></div>
+						<p:outputLabel for="nomeFuncionario" value="Nome do funcionário" />
+						<p:inputText value="#{listaFuncionarioController.nomeFuncionario}" id="nomeFuncionario">
+							<p:ajax event="click" update="@form" listener="#{listaFuncionarioController.nomeListener}" />
+						</p:inputText>
+						<div class="cleaner h10"></div>
+						
+						<p:commandButton value="Atualizar" 
+						action="#{listaFuncionarioController.pesquisar}" 
+						update="@form" icon="ui-icon-refresh" style="left: 150px"/>
+						<div class="cleaner h10"></div>
+						
+						<p:outputLabel value="Cargo:" />
+						<p:selectOneMenu id="funcao" value="#{listaFuncionarioController.cargoId}"
+						style="width:398px"  requiredMessage="Insira a função do funcionário.">
+							<f:selectItem itemLabel="Selecione a Função" itemValue="" noSelectionOption="false" />
+							<f:selectItems value="#{listaFuncionarioController.cargo}" />	
+						</p:selectOneMenu>
+						<div class="cleaner h10"></div>
+						
+						<p:commandButton value="Atualizar"
+						action="#{listaFuncionarioController.cargoListener}" 
+						update="@form" icon="ui-icon-refresh"  style="left: 150px"/>
+						<div class="cleaner h20"></div>
+						</div>
+						
+						<p:dataTable id="todos" rendered="#{listaFuncionarioController.todos == true}"
+						value="#{listaFuncionarioController.listFuncionario}" var="funcionario" 
+						type="unordered" itemType="none" paginator="true" rows="10" styleClass="paginated" 
+						style="width: 700px; margin-left: 130px">
+							<p:column headerText="Detalhes" style="width: 50px">
+								<p:commandLink update="@form" oncomplete="PF('funcionarioDialog').show()"
+								title="View Detail" styleClass="ui-icon ui-icon-search" style="margin-left: 17px">
+									<f:setPropertyActionListener value="#{funcionario}" 
+									target="#{listaFuncionarioController.selectedFuncionario}" />
+									<h:outputText value="#{funcionario.nome}" />
+								</p:commandLink>
+							</p:column>
+							<p:column headerText="Nome">
+								<h:outputText value="#{funcionario.nome}" style="display:inline-block" />
+							</p:column>
+								<p:column headerText="E-mail">
+									<h:outputText value="#{funcionario.email}" style="display:inline-block" />
+								</p:column>
+						</p:dataTable>
+
+						<p:dataTable id="Ativos" rendered="#{listaFuncionarioController.ativo == true}"
+						value="#{listaFuncionarioController.listFuncionarioAtivo}" var="funcionario" 
+						type="unordered" itemType="none" paginator="true" rows="10" styleClass="paginated"
+						style="width: 700px; margin-left: 130px">
+							<p:column headerText="Detalhes" style="width: 50px">
+								<p:commandLink update="@form" oncomplete="PF('funcionarioDialog').show()"
+								title="View Detail" styleClass="ui-icon ui-icon-search" style="margin-left: 17px">
+									<f:setPropertyActionListener value="#{funcionario}"
+									target="#{listaFuncionarioController.selectedFuncionario}" />
+									<h:outputText value="#{funcionario.nome}" />
+								</p:commandLink>
+							</p:column>
+							<p:column headerText="Nome">
+								<h:outputText value="#{funcionario.nome}" style="display:inline-block" />
+							</p:column>
+							<p:column headerText="E-mail">
+								<h:outputText value="#{funcionario.email}" style="display:inline-block" />
+							</p:column>
+						</p:dataTable>
+
+						<p:dataTable id="Inativos" rendered="#{listaFuncionarioController.inativo == true}"
+						value="#{listaFuncionarioController.listFuncionarioInativo}" var="funcionario" 
+						type="unordered" itemType="none" paginator="true" rows="10" styleClass="paginated"
+						style="width: 700px; margin-left: 130px">
+							<p:column headerText="Detalhes" style="width: 50px">
+								<p:commandLink update="@form" oncomplete="PF('funcionarioDialog').show()"
+								title="View Detail" styleClass="ui-icon ui-icon-search" style="margin-left: 17px">
+									<f:setPropertyActionListener value="#{funcionario}"
+									target="#{listaFuncionarioController.selectedFuncionario}" />
+									<h:outputText value="#{funcionario.nome}" />
+								</p:commandLink>
+							</p:column>
+							<p:column headerText="Nome">
+								<h:outputText value="#{funcionario.nome}" style="display:inline-block" />
+							</p:column>
+							<p:column headerText="E-mail">
+								<h:outputText value="#{funcionario.email}" style="display:inline-block" />
+							</p:column>
+						</p:dataTable>
+
+						<p:dataTable id="nomeFunc" rendered="#{listaFuncionarioController.pesquisar == true}"
+						value="#{listaFuncionarioController.listFuncionarioNome}" var="funcionario" 
+						type="unordered" itemType="none" paginator="true" rows="10" styleClass="paginated"
+						style="width: 700px; margin-left: 130px">
+							<p:column headerText="Detalhes" style="width: 50px">
+								<p:commandLink update="@form" oncomplete="PF('funcionarioDialog').show()"
+								title="View Detail" styleClass="ui-icon ui-icon-search" style="margin-left: 17px">
+									<f:setPropertyActionListener value="#{funcionario}"
+									target="#{listaFuncionarioController.selectedFuncionario}" />
+									<h:outputText value="#{funcionario.nome}" />
+								</p:commandLink>
+							</p:column>
+							<p:column headerText="Nome">
+								<h:outputText value="#{funcionario.nome}" style="display:inline-block" />
+							</p:column>
+							<p:column headerText="E-mail">
+								<h:outputText value="#{funcionario.email}" style="display:inline-block" />
+							</p:column>
+						</p:dataTable>
+
+						<p:dataTable id="cargo" rendered="#{listaFuncionarioController.cargoB == true}"
+						value="#{listaFuncionarioController.listFuncionarioCargo}" var="funcionario" 
+						type="unordered" itemType="none" paginator="true" rows="10" styleClass="paginated"
+						style="width: 700px; margin-left: 130px">
+							<p:column headerText="Detalhes" style="width: 50px">
+								<p:commandLink update="@form" oncomplete="PF('funcionarioDialog').show()"
+								title="View Detail" styleClass="ui-icon ui-icon-search" style="margin-left: 17px">
+									<f:setPropertyActionListener value="#{funcionario}"
+									target="#{listaFuncionarioController.selectedFuncionario}" />
+									<h:outputText value="#{funcionario.nome}" />
+								</p:commandLink>
+							</p:column>
+							<p:column headerText="Nome">
+								<h:outputText value="#{funcionario.nome}" style="display:inline-block" />
+							</p:column>
+							<p:column headerText="E-mail">
+									<h:outputText value="#{funcionario.email}" style="display:inline-block" />
+							</p:column>
+						</p:dataTable>
+
+						<p:dialog header="Informações do Funcionario" widgetVar="funcionarioDialog" 
+						modal="true" showEffect="blind" hideEffect="explode" resizable="true">
+							<p:outputPanel id="funcionarioDet" style="text-align:center;">
+								<p:panelGrid columns="1" columnClasses="label,value"
+								rendered="#{not empty listaFuncionarioController.selectedFuncionario}">
+									<f:facet name="header">
+										<p:outputLabel value="Detalhes" style="width: 410px; margin-left: 59px" />
+									</f:facet>
+									<p:panelGrid columns="2" styleClass="button">
+										<p:outputLabel value="Nome:" />
+										<p:outputLabel value="#{listaFuncionarioController.selectedFuncionario.nome}" />
+										<p:outputLabel value="Cargo:" />
+										<p:outputLabel value="#{listaFuncionarioController.selectedFuncionario.cargo.toString()}" />
+										<p:outputLabel value="Nome de Usuário:" />
+										<p:outputLabel value="#{listaFuncionarioController.selectedFuncionario.usuario.nomeUsuario}" />
+										<h:commandButton value="Alterar" action="#{listaFuncionarioController.prepararAlteracao}" 
+										styleClass="command_custom"/>
+										<h:commandButton value="Ativar" action="#{listaFuncionarioController.ativar}"
+										rendered="#{listaFuncionarioController.selectedFuncionario.status == false}" 
+										styleClass="command_custom"/>										
+										<h:commandButton value="Desativar" action="#{listaFuncionarioController.desativar}"
+										rendered="#{listaFuncionarioController.selectedFuncionario.status == true}" 
+										styleClass="command_custom"/>
+									</p:panelGrid>
+									<p:panelGrid columns="2"
+									rendered="#{listaFuncionarioController.selectedFuncionario.cargo == listaFuncionarioController.c}">
+										<f:facet name="header">
+											<p:outputLabel value="Responsável pelos ambientes:" style="width: 510px" />
+										</f:facet>
+										<p:dataList value="#{listaFuncionarioController.listAmbiente}"
+										rendered="#{not empty listaFuncionarioController.selectedFuncionario}"
+										var="ambiente" type="unordered" itemType="none" rows="10" styleClass="paginated">
+											<p:outputLabel value="#{ambiente.nome}" />
+										</p:dataList>
+									</p:panelGrid>
+								</p:panelGrid>
+							</p:outputPanel>
+						</p:dialog>
+					</h:form>
+				</div>
+			</div>
+			<div class="cleaner"></div>
+		</div>
+</ui:define>
+</ui:composition>

@@ -1,0 +1,156 @@
+<ui:composition 
+	template="../templates/template_gerencia.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:define name="conteudo">
+	<div id="tooplate_middle">
+		<div id="mid_title_12">Lista de Patrimônios</div>
+	</div>
+	<div id="tooplate_main">
+		<div class="col_w900">
+			<div class="col_w450_2 float_l">
+				<div id="cp_contact_form" style="margin-left:10px">
+					<h:form method="post" id="pForm" style="content:text/html; charset:utf-8">
+						<p:growl id="messages" showDetail="false" />
+						<div id="cp_contact_form_pat2">
+						<div class="ui-grid ui-grid-responsive">
+							<div class="ui-grid-row">
+								<div class="ui-grid-col-1">
+						<p:outputLabel value="Todos: " />
+						<p:selectBooleanCheckbox value="#{listaPatrimonioGerenteController.todos}">
+							<p:ajax update="@form" listener="#{listaPatrimonioGerenteController.clickCheckListener}" />
+						</p:selectBooleanCheckbox>
+						</div>
+						
+						<div class="ui-grid-col-1">
+						<p:outputLabel value="Inativos: " />
+						<p:selectBooleanCheckbox value="#{listaPatrimonioGerenteController.inativo}">
+							<p:ajax update="@form" listener="#{listaPatrimonioGerenteController.inativosListener}" />
+						</p:selectBooleanCheckbox>
+						</div>
+						
+						<div class="ui-grid-col-1">	
+						<p:outputLabel value="Ativos: " />
+						<p:selectBooleanCheckbox value="#{listaPatrimonioGerenteController.ativo}">
+							<p:ajax update="@form" listener="#{listaPatrimonioGerenteController.ativosListener}" />
+						</p:selectBooleanCheckbox>
+						</div>
+						</div>
+						</div>
+							
+						<p:outputLabel for="cdPatrimonio" value="Código do patrimônio" />
+						<p:inputText value="#{listaPatrimonioGerenteController.cdPatrimonio}" id="cdPatrimonio">
+							<p:ajax event="click" update="@form" listener="#{listaPatrimonioGerenteController.clickListener}" />
+						</p:inputText>
+						<div class="cleaner h10"></div>
+
+						<p:commandButton value="Atualizar"
+						action="#{listaPatrimonioGerenteController.pesquisar}"
+						update="@form" icon="ui-icon-refresh" style="margin-left: 150px"/>
+						<div class="cleaner h10"></div>
+						</div>
+						
+						<p:dataTable id="patTableTodos" var="patrimonio" rowKey="#{patrimonio}" scrollable="true" 
+						emptyMessage="Nenhum registro encontrado" value="#{listaPatrimonioGerenteController.listPatrimonioTodos}"
+						resizableColumns="true" style="margin-bottom:20px; width: 700px" rendered="#{listaPatrimonioGerenteController.todos == true}"
+						selection="#{listaPatrimonioGerenteController.selectedPatrimonios}" paginator="true" rowsPerPageTemplate="10,15,20" rows="10">
+							<p:column headerText="Número" style="width: 70px">
+								<h:outputText value="#{patrimonio.cdPatrimonio}" />
+							</p:column>
+							<p:column headerText="Tipo">
+								<h:outputText value="#{patrimonio.modelo.tipo.descricao}" />
+							</p:column>
+							<p:column headerText="Modelo">
+								<h:outputText value="#{patrimonio.modelo.nome}" />
+							</p:column>
+							<p:column headerText="Ambiente" filterBy="#{patrimonio.ambiente.nome}">
+									<h:outputText value="Inativo" rendered="#{patrimonio.ambiente == null}"/>
+									<h:outputText value="#{patrimonio.ambiente.nome}" rendered="#{patrimonio.ambiente != null}" />
+							</p:column>
+						</p:dataTable>
+
+						<p:dataTable id="patTableInativo" var="patrimonio" rowKey="#{patrimonio}" scrollable="true"
+						emptyMessage="Nenhum registro encontrado" value="#{listaPatrimonioGerenteController.listPatrimonioInativo}"
+						resizableColumns="true" style="margin-bottom:20px; width: 700px" rendered="#{listaPatrimonioGerenteController.inativo == true}"
+						paginator="true" rowsPerPageTemplate="10,15,20" rows="10">
+							<p:column headerText="Número" style="width: 70px" >
+								<h:outputText value="#{patrimonio.cdPatrimonio}" />
+							</p:column>
+							<p:column headerText="Tipo">
+								<h:outputText value="#{patrimonio.modelo.tipo.descricao}" />
+							</p:column>
+							<p:column headerText="Modelo">
+								<h:outputText value="#{patrimonio.modelo.nome}" />
+							</p:column>
+							<p:column headerText="Data da Baixa" filterBy="#{patrimonio.dtSaida.time}">
+								<h:outputText value="#{patrimonio.dtSaida.time}" >
+								<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-03:00"/>
+								</h:outputText>
+							</p:column>
+						</p:dataTable>
+
+						<p:dataTable id="patTableAtivo" var="patrimonio" rowKey="#{patrimonio}" scrollable="true"
+						emptyMessage="Nenhum registro encontrado" value="#{listaPatrimonioGerenteController.listPatrimonioAtivo}"
+						resizableColumns="true" style="margin-bottom:20px; width: 700px" rendered="#{listaPatrimonioGerenteController.ativo == true}"
+						selection="#{listaPatrimonioGerenteController.selectedPatrimonios}"
+						paginator="true" rowsPerPageTemplate="10,15,20" rows="10">
+							<p:column style="width: 30px">
+								<p:commandButton title="Alterar" icon="ui-icon-pencil"
+								action="#{listaPatrimonioGerenteController.prepararAlteracao}">
+									<f:setPropertyActionListener value="#{patrimonio}" 
+									target="#{listaPatrimonioGerenteController.selectedPatrimonioEdit}" />
+								</p:commandButton>
+							</p:column>
+							<p:column selectionMode="multiple" style="width:15px;" />
+							<p:column headerText="Número" style="width: 70px">
+								<h:outputText value="#{patrimonio.cdPatrimonio}" />
+							</p:column>
+							<p:column headerText="Tipo">
+								<h:outputText value="#{patrimonio.modelo.tipo.descricao}" />
+							</p:column>
+							<p:column headerText="Modelo">
+								<h:outputText value="#{patrimonio.modelo.nome}" />
+							</p:column>
+							<p:column headerText="Ambiente" filterBy="#{patrimonio.ambiente.nome}">
+								<h:outputText value="#{patrimonio.ambiente.nome}" />
+							</p:column>
+							<f:facet name="footer">
+								<p:commandButton value="Dar baixa"
+								action="#{listaPatrimonioGerenteController.verificarPatrimoniosSelecionados}"
+								icon="ui-icon-circle-close" update=":pForm:messages" />
+							</f:facet>
+						</p:dataTable>
+
+						<p:dataTable id="patTable" var="patrimonio" scrollable="true" emptyMessage="Nenhum registro encontrado"
+						value="#{listaPatrimonioGerenteController.listPatrimonio}" resizableColumns="true" 
+						style="margin-bottom:20px; width: 700px" rendered="#{not empty listaPatrimonioGerenteController.cdPatrimonio}">
+							<p:column headerText="Número" style="width: 70px">
+								<h:outputText value="#{patrimonio.cdPatrimonio}" />
+							</p:column>
+							<p:column headerText="Tipo">
+								<h:outputText value="#{patrimonio.modelo.tipo.descricao}" />
+							</p:column>
+							<p:column headerText="Modelo">
+								<h:outputText value="#{patrimonio.modelo.nome}" />
+							</p:column>
+							<p:column headerText="Ambiente">
+								<h:outputText value="#{patrimonio.ambiente.nome}" />
+							</p:column>
+							<f:facet name="footer">
+								<p:commandButton value="Dar baixa"
+								action="#{listaAmbienteRespController.verificarPatrimoniosSelecionados}"
+								icon="ui-icon-circle-close" update=":pForm:messages"/>
+							</f:facet>
+						</p:dataTable>
+					</h:form>
+			</div>
+			</div>
+			<div class="cleaner"></div>
+		</div>
+	</div>
+</ui:define>
+</ui:composition>

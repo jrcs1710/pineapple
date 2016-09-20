@@ -1,0 +1,76 @@
+﻿<ui:composition 
+	template="../templates/template_gerencia.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+<ui:define name="conteudo">
+	<div id="tooplate_middle">
+		<div id="mid_title_10">Cadastro de Patrimônios</div>
+	</div>
+	<div id="tooplate_main">
+		<div class="col_w900">
+			<div class="col_w450_2 float_l">
+				<div id="cp_contact_form">
+					<h:form method="post" id="form" name="contact">
+						<p:growl id="messages" showDetail="false" />
+						<h:inputHidden value="#{cadPatrimonioController.patrimonio.id}" />
+
+						<h:outputLabel value="Tipo:" for="tipo" />
+						<p:selectOneMenu id="tipo" dropdown="true" requiredMessage="Selecione o tipo"
+						value="#{cadPatrimonioController.tipoId}" required="true" style="width: 398px">
+							<f:selectItem itemLabel="Tipo do Patrimônio" itemValue="" noSelectionOption="false" />
+							<f:selectItems value="#{cadPatrimonioController.listTipos}" var="tipo" itemValue="#{tipo.id}" />
+							<p:ajax update="modelo" />
+						</p:selectOneMenu>
+						<div class="cleaner h10"></div>
+
+						<h:outputLabel value="Modelo:" for="modelo" />
+						<p:selectOneMenu id="modelo" requiredMessage="Selecione o Modelo"
+						value="#{cadPatrimonioController.modId}" required="true" style="width: 398px">
+							<f:selectItem itemLabel="Modelo do Patrimônio" itemValue="" noSelectionOption="false" />
+							<f:selectItems value="#{cadPatrimonioController.listModelos}" 
+							var="modelo" itemValue="#{modelo.id}" itemLabel="#{modelo.nome}" />
+						</p:selectOneMenu>
+						<div class="cleaner h10"></div>
+
+						<p:outputLabel for="num_Items" value="Numero de Itens"/>
+						<h:panelGrid columns="1" style="margin-bottom:10px">
+							<p:inputText id="num_Items" requiredMessage="Insira a quantidade de patrimônios a serem cadastrados"
+							value="#{cadPatrimonioController.quantidade}" required="true" />
+							<p:slider for="num_Items" minValue="1" maxValue="50" />
+						</h:panelGrid>
+						<div class="cleaner h10"></div>
+
+						<p:outputLabel for="num_pat" value="Nº Patrimônio:" />
+						<p:inputMask id="num_pat" requiredMessage="Insira o número do patrimônio" 
+						value="#{cadPatrimonioController.patrimonio.cdPatrimonio}" 
+						mask="#{cadPatrimonioController.empresa.mascara}" styleClass="input_field" required="true" />	
+						<div class="cleaner h10"></div>
+
+						<p:outputLabel for="amb_pat" value="Ambiente: "/>
+						<p:selectOneMenu id="amb_pat" value="#{cadPatrimonioController.ambId}" 
+						required="true" requiredMessage="Selecione um ambiente" style="width:398px">
+							<f:selectItem itemLabel="Ambiente do Patrimônio" itemValue="" noSelectionOption="false" />
+							<f:selectItems value="#{cadPatrimonioController.listAmbientes}" var="ambiente" itemValue="#{ambiente.id}" />
+						</p:selectOneMenu>
+
+						<p:outputLabel for="desc_pat" value="Descrição: "/>
+						<p:inputTextarea rows="10" cols="30" counter="display" 
+						maxlength="100" counterTemplate="{0} characters remaining." 
+						autoResize="false" value="#{cadPatrimonioController.patrimonio.descricao}"
+						id="desc_pat" />
+						<h:outputText id="display" />
+
+						<h:commandButton value="Salvar" id="btn_cad_pat" 
+						actionListener="#{cadPatrimonioController.salvar}" class="submit_btn float_l" />
+					</h:form>
+				</div>
+			</div>
+			<div class="cleaner"></div>
+		</div>
+	</div>
+</ui:define >
+</ui:composition >

@@ -1,0 +1,136 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- 
+	Template 2020 Dark Pixel
+    http://www.tooplate.com/view/2020-dark-pixel
+-->
+<title>Pineapple Inc</title> 
+<meta name="keywords" content="" /> 
+<meta name="description" content="" /> 
+<h:outputStylesheet library="css" name="tooplate_style.css"  />
+<!--////// CHOOSE ONE OF THE 3 PIROBOX STYLES  \\\\\\\--> 
+<link href="css_pirobox/white/style.css" media="screen" title="shadow" rel="stylesheet" type="text/css" /> 
+<!--<link href="css_pirobox/white/style.css" media="screen" title="white" rel="stylesheet" type="text/css" />
+<link href="css_pirobox/black/style.css" media="screen" title="black" rel="stylesheet" type="text/css" />--> 
+<!--////// END  \\\\\\\--> 
+ 
+<!--////// INCLUDE THE JS AND PIROBOX OPTION IN YOUR HEADER  \\\\\\\--> 
+<script type="text/javascript" src="js/jquery.min.js"></script> 
+<script type="text/javascript" src="js/piroBox.1_2.js"></script> 
+<script type="text/javascript"> 
+$(document).ready(function() {
+	$().piroBox({
+			my_speed: 600, //animation speed
+			bg_alpha: 0.5, //background opacity
+			radius: 4, //caption rounded corner
+			scrollImage : false, // true == image follows the page, false == image remains in the same open position
+			pirobox_next : 'piro_next', // Nav buttons -> piro_next == inside piroBox , piro_next_out == outside piroBox
+			pirobox_prev : 'piro_prev',// Nav buttons -> piro_prev == inside piroBox , piro_prev_out == outside piroBox
+			close_all : '.piro_close',// add class .piro_overlay(with comma)if you want overlay click close piroBox
+			slideShow : 'slideshow', // just delete slideshow between '' if you don't want it.
+			slideSpeed : 4 //slideshow duration in seconds(3 to 6 Recommended)
+	});
+});
+</script> 
+<!--////// END  \\\\\\\--> 
+
+</h:head>
+<h:body>
+
+<div id="tooplate_wrapper">
+	
+    <div id="tooplate_header">
+    
+    	<div id="site_title"><h1><a href="#">Dark Pixel</a></h1></div>
+        <div id="twitter"><a href="#"></a></div>
+        
+        <div id="tooplate_menu">
+            <ul>
+                <li><a href="home.xhtml">Home</a></li>
+                <li><a href="login.xhtml">Login</a></li>
+                <li><a href="sobre_nos.xhtml">Sobre Nós</a></li>
+                <li><a href="fale_conosco.xhtml" class="current">Fale Conosco</a></li>
+            </ul>    	
+        </div> <!-- end of tooplate_menu -->
+        
+    </div> <!-- end of header -->
+    
+    <div id="tooplate_middle">
+    	<div id="mid_title">
+        	Informações para contato
+        </div>
+        <p> Caso queira entrar em contato, preencha os campos abaixo ou visite nosso escritório.</p>
+    </div> <!-- end of middle -->
+    
+    <div id="tooplate_main">
+    	<div class="col_w900">
+            
+            	<div class="col_w450 float_l">
+                  <h3>Mande uma Mensagem</h3>
+					<div id="cp_contact_form">
+                        <form method="post" name="contact" action="#">
+
+							<label for="author">Nome:</label> 
+                            <input type="text" id="author" name="author" class="required input_field" />
+							<div class="cleaner h10"></div>
+
+							<label for="email">E-mail:</label> 
+                            <input type="text" class="validate-email required input_field" name="email" id="email" />
+							<div class="cleaner h10"></div>
+
+							<label for="subject">Assunto:</label> 
+                            <input type="text" class="validate-subject required input_field" name="subject" id="subject"/>	
+							<div class="cleaner h10"></div>
+
+							<label for="text">Mensagem:</label> 
+                            <textarea id="text" name="text" rows="0" cols="0" class="required"></textarea>
+							<div class="cleaner h10"></div>                
+
+							<input type="submit" value="Mandar" id="submit" name="submit" class="submit_btn float_l" />
+							<input type="reset" value="Reset" id="reset" name="reset" class="submit_btn float_r" />
+
+						</form>
+        
+                    </div>
+                   
+                </div>
+                
+                <div class="col_w450 float_r">
+                    <h3>Localização</h3>
+                    <div id="map">
+                    <a class="pirobox" href="images/map_big.jpg" title="Map">
+                        <img width="300" height="200" src="images/map_thumb.jpg" alt="Map" />
+                    </a>
+				  </div>  
+    
+                    <div class="cleaner h30"></div>
+                                    
+                    <h3>Nosso Endereço</h3>
+                    <h6><strong>Pineapple Inc</strong></h6>
+                    Al. Barão de Limeira, 539 <br />
+                  	Santa Cecília - São Paulo - SP<br />
+                    CEP: 01202-001<br />
+					Tel: 3273-5000<br />
+                </div>
+                
+				<div class="cleaner"></div>
+        </div>
+        
+    </div> <!-- end of main -->
+    
+</div> <!-- end of wrapper -->
+
+<div id="tooplate_footer_wrapper">
+    <div id="tooplate_footer">
+    
+        Copyright © 2015 <a href="#">Pineapple Inc</a> - Design: <a href="http://www.pudim.com.br/">Dwargar</a>
+    
+    </div> <!-- end of tooplate_footer -->
+</div>
+</h:body>
+</html>

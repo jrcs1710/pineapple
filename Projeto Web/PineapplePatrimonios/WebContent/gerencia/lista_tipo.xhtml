@@ -1,0 +1,78 @@
+<ui:composition 
+	template="../templates/template_gerencia.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:define name="conteudo">
+	<div id="tooplate_middle">
+		<div id="mid_title_13">Lista de Tipos</div>
+	</div>
+	<div id="tooplate_main">
+		<div class="col_w900">
+			<div class="col_w450_2 float_l">
+				<div id="cp_contact_form">
+					<h:form method="post" id="form" style="content:text/html; charset:utf-8">
+						<p:growl id="messages" showDetail="false" />
+						<p:outputLabel value="Todos: " />
+						<p:selectBooleanCheckbox value="#{listaTipoController.todos}">
+							<p:ajax update="@form" listener="#{listaTipoController.todosListener}" />
+						</p:selectBooleanCheckbox>
+						
+						<p:outputLabel for="nometipo" value="Código do patrimônio" />
+						<p:inputText value="#{listaTipoController.nomeTipo}" id="nometipo">
+							<p:ajax event="click" update="@form" listener="#{listaTipoController.nomeListener}" />
+						</p:inputText>
+						<div class="cleaner h10"></div>
+						
+						<p:commandButton value="Atualizar" 
+						action="#{listaTipoController.pesquisar}" 
+						update="@form" icon="ui-icon-refresh" style="margin-left: 150px"/>
+						<div class="cleaner h10"></div>
+
+						<p:dataTable var="tipo" rendered="#{listaTipoController.todos == true}"
+						emptyMessage="Nenhum registro encontrado" value="#{listaTipoController.listTipo}" 
+						paginator="true" id="todos" rowsPerPageTemplate="5,10,15">
+							<f:facet name="header"> 
+								Todos os tipos
+							</f:facet>
+							<p:column>
+							<div class="button">
+								<h:commandButton value="Alterar" action="#{listaTipoController.prepararAlteracao}" 
+								styleClass="command_custom">
+									<f:setPropertyActionListener value="#{tipo}" target="#{listaTipoController.selectedTipo}" />
+								</h:commandButton>
+							</div>
+							</p:column>
+							<p:column headerText="Descrição">
+								<p:outputLabel value="#{tipo.descricao}" />
+							</p:column>
+						</p:dataTable>
+							
+						<p:dataTable var="tipo" rendered="#{ not empty listaTipoController.nomeTipo}"
+						emptyMessage="Nenhum registro encontrado" value="#{listaTipoController.listTipoNome}"  
+						paginator="true" id="nome" rowsPerPageTemplate="5,10,15">
+							<f:facet name="header">
+								Tipos
+							</f:facet>
+							<p:column>
+							<div class="button">
+								<h:commandButton value="Alterar" action="#{listaTipoController.prepararAlteracao}" styleClass="command_custom">
+									<f:setPropertyActionListener value="#{tipo}" target="#{listaTipoController.selectedTipo}" />
+								</h:commandButton>
+							</div>
+							</p:column>
+							<p:column headerText="Descrição">
+								<p:outputLabel value="#{tipo.descricao}" />
+							</p:column>
+						</p:dataTable>
+					</h:form>
+				</div>
+			</div>
+			<div class="cleaner"></div>
+		</div>
+	</div>
+</ui:define>
+</ui:composition>

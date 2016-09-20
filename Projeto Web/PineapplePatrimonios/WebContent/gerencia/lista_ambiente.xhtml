@@ -1,0 +1,187 @@
+﻿<ui:composition 
+	template="../templates/template_gerencia.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:define name="conteudo">
+	<div id="tooplate_middle">
+		<div id="mid_title_7">Lista de Ambientes</div>
+	</div>
+	<div id="tooplate_main">
+		<div class="col_w900">
+		<div class="col_w450_2 float_l">
+				<div id="cp_contact_form">
+					<h:form method="post" id="form" style="content:text/html; charset:utf-8">
+						<p:growl id="messages" globalOnly="true" showDetail="false" />			
+						<div class="ui-grid ui-grid-responsive">
+							<div class="ui-grid-row">
+								<div class="ui-grid-col-1">
+									<p:outputLabel value="Todos: "  style="color: white"/>
+									<p:selectBooleanCheckbox value="#{listaAmbienteController.todos}">
+										<p:ajax update="@form" listener="#{listaAmbienteController.clickCheckListener}" />
+									</p:selectBooleanCheckbox>
+								</div>
+								<div class="ui-grid-col-1">
+									<p:outputLabel value="Inativos: "  style="color: white"/>
+									<p:selectBooleanCheckbox value="#{listaAmbienteController.inativo}">
+										<p:ajax update="@form" listener="#{listaAmbienteController.inativoListener}" />
+									</p:selectBooleanCheckbox>
+								</div>
+        						<div class="ui-grid-col-1">
+									<p:outputLabel value="Ativos: " style="color: white"/>
+									<p:selectBooleanCheckbox value="#{listaAmbienteController.ativo}">
+										<p:ajax update="@form" listener="#{listaAmbienteController.ativoListener}" />
+									</p:selectBooleanCheckbox>
+								</div>
+							</div>
+						</div>
+						<div class="cleaner h10"></div>
+						
+						<p:outputLabel for="nome" value="Nome do Ambiente" style="color: white"/>
+						<p:inputText value="#{listaAmbienteController.pesquisarAmbiente}" id="nome">
+							<p:ajax event="click" update="@form" listener="#{listaAmbienteController.clickListener}" />
+						</p:inputText>
+						<div class="cleaner h10"></div> 
+						
+						<p:commandButton value="Atualizar" update="@form" style="left: 157px"/>
+						<div class="cleaner h20"></div>
+						
+						<p:dataTable id="basic" rendered="#{not empty listaAmbienteController.pesquisarAmbiente}"
+						value="#{listaAmbienteController.pAmbiente}" var="ambiente">
+							<p:column>
+								<p:commandButton update="@form" oncomplete="PF('ambienteDialog').show()" 
+								title="View Detail" icon="ui-icon-search" style="margin-left:50px">
+									<f:setPropertyActionListener value="#{ambiente}" target="#{listaAmbienteController.selectedAmbiente}" />
+								</p:commandButton>
+							</p:column>
+							<p:column headerText="Nome">
+								<h:outputText value="#{ambiente.nome}" style="display:inline-block" />
+							</p:column>		
+							<p:column headerText="Andar">
+								<h:outputText value="#{ambiente.andar}" style="display:inline-block" />
+							</p:column>
+						</p:dataTable>
+
+						<p:dataTable id="inativo" rendered="#{listaAmbienteController.inativo == true}"
+						value="#{listaAmbienteController.listAmbienteInativo}" var="ambiente">
+							<p:column>
+								<p:commandButton update="@form" oncomplete="PF('ambienteDialog').show()" 
+								title="View Detail" icon="ui-icon-search" style="margin-left:50px">
+									<f:setPropertyActionListener value="#{ambiente}" 
+									target="#{listaAmbienteController.selectedAmbiente}" />
+								</p:commandButton>
+							</p:column>
+							<p:column headerText="Nome">
+								<h:outputText value="#{ambiente.nome}" style="display:inline-block" />
+							</p:column>
+							<p:column headerText="Andar">
+								<h:outputText value="#{ambiente.andar}" style="display:inline-block" />
+							</p:column>
+						</p:dataTable>
+							
+						<p:dataTable id="ativo" rendered="#{listaAmbienteController.ativo == true}"
+						value="#{listaAmbienteController.listAmbienteAtivo}" var="ambiente">
+							<p:column>
+								<p:commandButton update="@form" oncomplete="PF('ambienteDialog').show()" 
+								title="View Detail" icon="ui-icon-search" style="margin-left:50px">
+									<f:setPropertyActionListener value="#{ambiente}"
+									target="#{listaAmbienteController.selectedAmbiente}" />
+								</p:commandButton>
+							</p:column>
+							<p:column headerText="Nome">
+								<h:outputText value="#{ambiente.nome}" style="display:inline-block" />
+							</p:column>
+							<p:column headerText="Andar">
+								<h:outputText value="#{ambiente.andar}" style="display:inline-block" />
+							</p:column>
+						</p:dataTable>
+
+						<p:dataTable id="basicTodos" rendered="#{listaAmbienteController.todos == true}"
+						value="#{listaAmbienteController.listAmbiente}" var="ambiente">
+							<p:column>
+								<p:commandButton update="@form" oncomplete="PF('ambienteDialog').show()" 
+								title="View Detail" icon="ui-icon-search" style="margin-left:50px">
+									<f:setPropertyActionListener value="#{ambiente}" 
+									target="#{listaAmbienteController.selectedAmbiente}" />
+								</p:commandButton>
+							</p:column>
+							<p:column headerText="Nome">
+								<h:outputText value="#{ambiente.nome}" style="display:inline-block" />
+							</p:column>
+							<p:column headerText="Andar">
+								<h:outputText value="#{ambiente.andar}" style="display:inline-block" />
+							</p:column>
+						</p:dataTable>
+							
+						<p:dialog header="Informações do Ambiente" id="dialogo" widgetVar="ambienteDialog" 
+						modal="true" showEffect="blind" hideEffect="explode" resizable="true">
+							<p:outputPanel id="ambienteDet" style="text-align:center;">
+								<p:panelGrid columns="2" columnClasses="label,value"
+								rendered="#{not empty listaAmbienteController.selectedAmbiente}">
+									<f:facet name="header">
+										<p:outputLabel value="Detalhes"
+										style="width: 620px; margin-left: 99px" />
+									</f:facet>
+									<p:panelGrid columns="2" style="width:567.2px">
+										<p:outputLabel value="Nome:" style="margin-left: 53px" />
+										<p:outputLabel value="#{listaAmbienteController.selectedAmbiente.nome}" />
+										<p:outputLabel value="Andar:" style="margin-left: 53px" />
+										<p:outputLabel value="#{listaAmbienteController.selectedAmbiente.andar}" />
+										<p:outputLabel value="Responsável:" style="margin-left: 53px" />
+										<p:outputLabel value="#{listaAmbienteController.selectedAmbiente.responsavel}" />
+										<h:commandButton value="Alterar" class="submit_btn float_l" 
+										action="#{listaAmbienteController.alterar}" />
+										<h:commandButton value="Desativar" class="submit_btn float_l"
+										action="#{listaAmbienteController.desativar}"
+										rendered="#{listaAmbienteController.selectedAmbiente.status == true}" />
+										<h:commandButton value="Ativar" class="submit_btn float_l" 
+										action="#{listaAmbienteController.ativar}"
+										rendered="#{listaAmbienteController.selectedAmbiente.status == false}" />
+									</p:panelGrid>
+								</p:panelGrid>
+								<p:panelGrid columns="2" style="width:450px"
+								rendered="#{listaAmbienteController.selectedAmbiente.status == true}">
+									<f:facet name="header">
+										<p:outputLabel value="Patrimonios no local" style="width: 724px; margin-left: 45px" />
+									</f:facet>
+										<p:panelGrid columns="2">
+											<p:dataTable paginator="true" rowsPerPageTemplate="10,15,20" rows="10" 
+											emptyMessage="Nenhum Patrimônio no local."
+											rowKey="#{patrimonio}" id="tablePatrimonios"
+											selection="#{listaAmbienteController.selectedPatrimonios}"
+											value="#{listaAmbienteController.ambiente.patrimonios}"
+											rendered="#{not empty listaAmbienteController.selectedAmbiente}"
+											var="patrimonio" type="unordered" scrollable="true" style="margin-left: 155px">
+												<p:column selectionMode="multiple" style="width:15px;" />
+												<p:column headerText="Número" style="width: 75px">
+													<h:outputText value="#{patrimonio.cdPatrimonio}" />
+												</p:column>
+												<p:column headerText="Tipo" style="width: 100px">
+													<h:outputText value="#{patrimonio.modelo.tipo.descricao}" />
+												</p:column>
+												<p:column headerText="Modelo" style="width: 100px">
+													<h:outputText value="#{patrimonio.modelo.nome}" />
+												</p:column>
+												<p:column headerText="Ambiente" style="width: 100px">
+													<h:outputText value="#{patrimonio.ambiente.nome}" />
+												</p:column>
+												<f:facet name="footer">
+													<p:commandButton action="#{listaAmbienteController.prepararMovimentacao}"
+													value="Detalhes da Movimentação" />
+												</f:facet>
+										</p:dataTable>
+									</p:panelGrid>
+								</p:panelGrid>
+							</p:outputPanel>
+						</p:dialog>
+					</h:form>
+				</div>
+			</div>
+			<div class="cleaner"></div>
+			</div>
+			</div>
+</ui:define>
+</ui:composition>

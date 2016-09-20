@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14410570294530" configfile="/PineapplePatrimonios/WebContent/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="*" id="pf14423575425556" referenceLink="//@navigationRule.1/@fromViewId|" outlinks="pf14423575425557 pf14435654828854" path="/*"/>
+  <nodes xsi:type="pageflow:PFPage" name="login.xhtml" id="pf14423575425558" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf14423575425557" path="/login.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="gerencia/info_empresa.xhtml" id="pf14435654828855" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" inlinks="pf14435654828854" path="/gerencia/info_empresa.xhtml"/>
+  <links id="pf14423575425557" target="pf14423575425558" source="pf14423575425556" outcome="paginaLogin"/>
+  <links id="pf14435654828854" target="pf14435654828855" source="pf14423575425556" outcome="infoEmpresa"/>
+</pageflow:Pageflow>
